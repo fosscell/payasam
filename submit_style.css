@@ -1,0 +1,328 @@
+﻿body
+{
+	background-color:#141845;
+	margin:0px;
+}
+
+@font-face 
+{
+	font-family:"Cafe_Tathva";
+	src:url('CafeNeroM54.ttf');
+}
+
+/*head*/
+#head
+{
+	background-color:black;
+	height:40px;
+	width:100%;
+}
+
+#tathva_logo
+{
+	position:absolute;
+	left:23px;
+	top:0px;
+	height:130px;
+	width:130px;
+	background-color:white;
+	background-image:url("images/tathva_logo.png");
+	box-shadow: 0px 10px 10px #000000;
+}
+
+#head_inner
+{
+    position:relative;
+	margin-left:210px;
+	height:35px;
+	display:block;
+	width:auto;
+	min-width:850px;
+		
+}
+#hd1,#hd2,#hd3,#hd4,#hd5,#hd6
+{
+	-webkit-transition:height 0.4s,padding-top 0.4s;
+	-moz-transition:height 0.4s,padding-top 0.4s;
+	-o-transition:height 0.4s,padding-top 0.4s;
+	transition:height 0.4s,padding-top 0.4s;	
+    position:relative;
+    float:left;
+	height:30px;
+	width:16.2%;
+	text-align:center;
+	color:white;
+	background-color:black;
+	padding-top:10px;
+	font-size:15px;
+	font-family:Cafe_Tathva;	
+}
+
+#hd2:hover,#hd3:hover,#hd4:hover,#hd5:hover,#hd6:hover
+{
+	
+	height:30px;
+	padding-top:20px;
+	color:black;
+	cursor:pointer;
+}
+
+#hd1:hover
+{
+	cursor:pointer;
+}
+
+
+#hd2:hover
+{
+	background-color:#404589;
+}
+
+#hd3:hover
+{
+	background-color:#074b72;
+}
+
+#hd4:hover
+{
+	background-color:#2e64ae;
+}
+
+#hd5:hover
+{
+	background-color:#002e6a;
+}
+
+#hd6:hover
+{
+	background-color:#195770;
+}
+
+/* panel */
+
+#panel
+{
+	position:absolute;
+	height:100%;
+	min-height:680px;
+	width:175px;
+	left:20px;
+	background-color:rgba(0,0,0,0.5);
+
+}
+
+#panel_inner
+{
+	position:relative;
+	height:auto;
+	margin-top:200px;
+}
+
+#panel_inner p
+{
+    padding-left:20px;
+    padding-top:3px;
+    position:relative;
+	color:silver;
+	text-decoration:none;
+	font-family:Cafe_tathva;
+	font-size:14.5px;
+	-webkit-transition:background-color 0.4s,color 0.4s;
+	-moz-transition:background-color 0.4s,color 0.4s;
+	-o-transition:background-color 0.4s,color 0.4s;
+	transition:background-color 0.4s,color 0.4s;
+
+}
+
+#panel_inner .panel 
+{
+	padding: 5px 0 5px;
+}
+
+
+#panel_inner .panel>p:hover
+{
+	cursor:pointer;
+}
+
+#panel_inner .pnl
+{
+	overflow:hidden;
+	margin:0px;
+	padding:0px;
+	position:relative;
+    display:none;
+    top:0px;
+    left:0px;
+    border-bottom:2px solid none;
+    background-color:rgba(0,0,0,0.3);
+    -webkit-transition:border-bottom-color 0.4s;
+    -moz-transition:border-bottom-color 0.4s;
+    -o-transition:border-bottom-color 0.4s;
+    transition:border-bottom-color 0.4s;
+
+}
+
+#panel_inner .pnl p
+{
+	-webkit-transition:border-left 0.4s;
+    -moz-transition:border-left 0.4s;
+    -o-transition:border-left 0.4s;
+    transition:border-left 0.4s;
+	padding: 0 0 0 30px;
+	margin:5px 0 0 0;
+	font-size:12.5px;
+}
+
+#panel_inner .pnl p:hover
+{
+	border-left:2px solid white;
+	cursor:pointer;
+}
+
+#panel_inner .pnl a
+{
+	color:silver;
+	text-decoration:none;
+}
+
+/* wrapper */
+#wrapper
+{
+	position:relative;
+	top:30px;
+	margin-left:300px;
+		
+}
+
+#heading
+{
+	position:absolute;
+	left:280px;
+	top:28px;
+	height:45px;
+	width:566px;
+	background-color:black;
+    z-index:3;
+    color:white;
+    font-family:Cafe_Tathva;
+    font-size:30px;
+    padding-top:16px;
+    text-align:center;
+}
+
+#link
+{
+	position:absolute;
+	left:5px;
+	top:80px;
+	height:360px;
+	width:164px;
+	color:silver;
+	background-color:black;
+	text-align:right;
+	z-index:1;
+	padding-top:40px;
+	
+}
+
+#link p
+{
+	padding-right:10px;
+	padding-bottom:5px;
+}
+
+#link p :hover
+{
+	cursor:pointer;
+}
+
+
+#text
+{
+	position:absolute;
+	height:335px;
+	width:600px;
+	background-color:white;
+	left:40px;
+	top:40px;
+	overflow:auto;
+	z-index:2;
+	color:black;
+}
+
+#midframe
+{
+	position:absolute;
+	height:420px;
+	width:650px;
+	background-color:white;
+	left:169px;
+	top:70px;
+	z-index:2;
+	
+}
+
+#register
+{
+	position:absolute;
+	left:480px;
+	bottom:10px;
+	cursor:pointer;
+	width:150px;
+	height:25px;
+	color:white;
+	font-family:Cafe_Tathva;
+	text-align:center;
+	background-color:rgba(0,0,0,0.5);
+	
+}
+
+#register p
+{
+	padding-top:10px;
+}
+
+#contact
+{
+	position:absolute;
+	left:10px;
+	bottom:10px;
+	height:25px;
+	width:75px;
+	cursor:pointer;
+    font-weight:bold;
+    
+}
+
+#prize
+{
+	position:absolute;
+	left:95px;
+	bottom:10px;
+	height:25px;
+	width:75px;
+	cursor:pointer;
+    font-weight:bold;
+
+
+}
+
+#participant
+{
+	position:absolute;
+	left:180px;
+	bottom:10px;
+	height:25px;
+	width:75px;
+	cursor:pointer;
+    font-weight:bold;
+
+	
+}
+
+p
+{
+	margin:0;
+	padding:0;
+}
