@@ -1,4 +1,5 @@
 <?php
+// get the list of tags as a JSON string
 require_once("config.php");
 $mysqli = new mysqli($host,$db_user,$db_password,$db_name);
 if ($mysqli->connect_errno)
@@ -8,7 +9,7 @@ $tags = array();
 while($row = $result->fetch_assoc()) {
   $cur_tags = explode("::", substr($row['tags'],1,-1));
   foreach ($cur_tags as $tag)
-    $tags[$tag] = 1;
+    $tags[$tag] = 1; // PHP array-keys are unique (no duplicates)
 }
 $tags = array_keys($tags);
 print json_encode($tags);

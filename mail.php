@@ -1,4 +1,6 @@
 <?php
+// This page is used to sent mails to multiple recipients, whose
+// addresses are taken from DB (group_mail table), filtered by tags
 require_once("config.php");
 session_start();
 if (isset($_SESSION["type"])) {
@@ -128,7 +130,7 @@ $(document).ready(function () {
 <body>
   <h1>Tathva 12 mailer</h1>
   Group mail
-  <a href="mails_add.php">Add new mails</a>
+  <a href="mails_add.php">Add new eMails</a>
   <a href="mail_history.php">Mail history</a>
   <a href="logout.php">Log out</a><br/><br/>
   <form action="mail.php" method="post">
@@ -141,8 +143,8 @@ $(document).ready(function () {
       </td>
     </tr><tr>
       <td colspan=2>
-	main tag: <input name="wtag" type="text" placeholder="select those with tag" value="<?php echo $wtag; ?>" /><br/>
-	"sent" tag: <input name="stag" type="text" placeholder="'sent' marking tag" value="<?php echo $stag; ?>" /><br/>
+	Select those with tag: <input name="wtag" type="text" placeholder="Selector tag" value="<?php echo $wtag; ?>" /><br/>
+	After sending, add this tag: <input name="stag" type="text" placeholder="'sent' marker" value="<?php echo $stag; ?>" /><br/>
 	<a href="javascript:void(0);" id="seetags">See all tags</a>
 	<a href="javascript:void(0);" id="search">Search</a>
 	<div id="selection"></div>

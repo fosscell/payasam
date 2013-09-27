@@ -1,4 +1,6 @@
 <?php
+// This page is used to add email addresses to the database (group_mail)
+// along with associated tags.
 require_once("config.php");
 session_start();
 if (isset($_SESSION["type"])) {
@@ -52,12 +54,12 @@ if (isset($_POST['add'])) {
 <body>
   <h1>Tathva 12 mailer</h1>
   <a href="mail.php">Group mail</a>
-  Add new mails
+  Add new eMails
   <a href="mail_history.php">Mail history</a>
   <a href="logout.php">Log out</a><br/><br/>
   <form action="mails_add.php" method="post">
-    <input name="tag" placeholder="Main tag" type="text" /><br/>
-    <textarea name="emails" placeholder="Line-separated list of eMails" style="height:300px;width:280px"></textarea><br/>
+    <input name="tag" placeholder="Tag(s) (eg. tag1::tag2)" type="text" /><br/>
+    <textarea name="emails" placeholder="Line-separated list of eMail addresses" style="height:300px;width:280px"></textarea><br/>
     <input name="add" type="submit" value="Add" />
   </form>
 </body>
