@@ -1,5 +1,6 @@
 <?php
 require_once("initdb.php");
+// checking for unauthorised access 
 if (!isset($_SESSION['type']) || $_SESSION['type'] != "AD")
     _exit("You do not have access to this page");
 ?>
@@ -10,6 +11,7 @@ if (!isset($_SESSION['type']) || $_SESSION['type'] != "AD")
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 <title>Tathva 12 CMS: Administrator Terminal</title>
 <link rel="shortcut icon" href="taticon.png" type="image/png"/>
+<!-- CSS styles -->
 <style type="text/css">
 body
 {
@@ -59,6 +61,7 @@ tr:hover {
 <body>
     <div style="text-align:right"><a href="logout.php">Log out</a></div>
     <?php
+// populating the admin panel for managers from the MANAGERS table
 $query="SELECT username, password, eventcode, validate FROM managers";
 $result=$mysqli->query($query);
 $row=$result->fetch_assoc();
@@ -75,10 +78,14 @@ else {
     do {
 	$u = $row['username'];
 	$x = "exec.php?u=$u";
-	$v = "<a href='$x&a=";
+	$v = "<a href='$x&a="; 
+// setting validate or invalidate according to the value (0 or 1) in the corresponding column in the Managers table    
 	$v .= ($row['validate'] == 0) ? "val'>Validate" : "inv'>Invalidate";
 	$v .= "</a>";
-	echo "<tr> <td>$u</td> <td>$row[password]</td> <td>$row[eventcode]</td> <td>$v</td> <td><a href='javascript:alert(\"$x&a=del\");'>Delete</a></td></tr>";
+// $v stores the link to exec.php which validates/invalidates accordingly
+// <a href='exec.php?u=$row['username']&a=(val/inv)'>Validate/Invalidate</a>
+// delete l      
+	echo "<tr> <td>$u</td> <td>$row[password]</td> <td>$row[eventcode]</td> <td>$v</td> <td><a href='$x&a=del'>Delete</a></td></tr>";
     } while($row=$result->fetch_array());
     ?></table><br/>
     <?php
