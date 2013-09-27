@@ -1,4 +1,5 @@
 <?php
+// this is where event managers signs up, and everyone logs in
 require_once("initdb.php");
 $msg = "";
 if (isset($_SESSION['type'])) {
@@ -21,7 +22,7 @@ if (isset($_SESSION['type'])) {
   }
 }
 $erlist = "";
-if (isset($_POST["signup"])) {
+if (isset($_POST["signup"])) { // Sign up button clicked
   $s = 0;
   if ($_POST["type"] == "mn") {
     if (TRUE === $mysqli->query("INSERT INTO `managers` VALUES ('$_POST[ecode]', '$_POST[uname]', '$_POST[pass]', 0)")) {
@@ -39,7 +40,7 @@ if (isset($_POST["signup"])) {
     $msg .= "<span class='color'>Please wait till an administrator validates your account.</span>";
   else
     $msg = "<span class='color'>Signup failed</span>";
-} else if (isset($_POST["signin"])) {
+} else if (isset($_POST["signin"])) { // Sign in button clicked
   $user = $mysqli->real_escape_string($_POST['username']);
   $pass = $mysqli->real_escape_string($_POST['password']);
   if ($user == "admin" && $pass == "12tathva12") {
@@ -55,6 +56,7 @@ if (isset($_POST["signup"])) {
     header("Location: cl.php");
     _exit();
   }
+  // execution reached here means it could be an event manager trying to log in
   $res = $mysqli->query("select eventcode, validate from managers where username='$user' and password='$pass'");
   if ($res->num_rows == 0)
     $msg = "<span class='color'>Invalid Username or Password!</span>";
@@ -238,6 +240,7 @@ if ($erlist) {
       <select name="category">
         <option value="">--event category--</option>
         <?php
+// populate with event categories
 $res1 = $mysqli->query("select cat_id, name from event_cats where par_cat=-1");
 while($row=$res1->fetch_assoc()) {
   $res2 = $mysqli->query("select cat_id, name from event_cats where par_cat=$row[cat_id]");
