@@ -2,10 +2,11 @@
 require_once("initdb.php");
 $eventcode = "";
 if (isset($_SESSION["type"])) {
+  // only accessible to managers and proofreaders
   if ($_SESSION["type"] == 'MN' || $_SESSION["type"] == 'PR') {
     if (isset($_SESSION["ecode"]))
       $eventcode = $_SESSION["ecode"];
-    else
+    else // event code not set!
       _exit("Please go back and try again!");
   } else
     _exit("You don't have permission!");
@@ -14,7 +15,7 @@ if (isset($_SESSION["type"])) {
   _exit();
 }
 
-if (isset($_POST["prback"])) {
+if (isset($_POST["prback"])) { // back button clicked (visible to only proofreaders)
   unset($_SESSION["ecode"]);
   header("Location: $pr_page");
   _exit();
@@ -51,10 +52,13 @@ $mysqli->close();
   <script type="text/javascript" src="ajaxupload.js"></script>
   <script type="text/javascript" src="kaja-input.js"></script>
   <script type="text/javascript"><!--
+
+// remove a section
 function remove_sec() {
     $(this).remove();
 }
 
+// move a section up
 function move_sec_up() {
     var next = $(this).next('.desc-sec');
     var mover = $(this).prev('.desc-sec');
@@ -68,6 +72,7 @@ function move_sec_up() {
     }, 400);
 }
 
+// move a section down
 function move_sec_down() {
     $(this).insertAfter($(this).next('.desc-sec'));
     $(this).animate({
@@ -76,10 +81,12 @@ function move_sec_down() {
     }, 400);
 }
 
+// get (parent) section in which the DOM object 'e' is in
 function get_par_sec(e) {
     return $(e).closest(".desc-sec");
 }
 
+// create and add a new section at the bottom (right before the element with id 'new_sec')
 function new_desc_sec(title, content) {
     var link = $("#new_sec");
     var new_section = $("<div/>", {
@@ -90,6 +97,8 @@ function new_desc_sec(title, content) {
         class: "desc-head"
     });
     var sec_ttl = $("<input type='text' />").appendTo(desc_head); //$(..).attr({name: 'xyz'})
+
+    // buttons: Remove, Down, Up
     $("<span/>", {
         html: "Remove",
         class: "desc-but"
@@ -134,6 +143,7 @@ function new_desc_sec(title, content) {
         }
     } else sec_ttl.focus();
 }
+
 $(document).ready(function () {
     new_kaja_input($("#intro"));
     $("#new_sec").click(function () {
@@ -141,68 +151,64 @@ $(document).ready(function () {
     });
     
     $("#event_form").submit(function () {
-	$("#con_disp").get(0).value=null;
-	$("#pr_disp").get(0).value=null;
-	
-	$(".con").each(function(index) {
-	    $("#con_disp").get(0).value += $(this).find(".na").val()+"||@||"+$(this).find(".co").val()+"||@||"+$(".em").val()+"||0||";
-	});
+        $("#con_disp").get(0).value=null;
+        $("#pr_disp").get(0).value=null;
+        
+        $(".con").each(function(index) {
+            $("#con_disp").get(0).value += $(this).find(".na").val()+"||@||"+$(this).find(".co").val()+"||@||"+$(".em").val()+"||0||";
+        });
 
-	$("#pr_disp").get(0).value = $(this).find("#pr").val();
-    
-	$("#prtpnt").get(0).value=$(this).find("#par_min").val()+"||@||"+$(this).find("#par_max").val(); 
-	
-	var desc_hid = $("#desc").get(0);
-	desc_hid.value = $("#intro").val();
-	$(".desc-sec").each(function(index) {
-	    $("#desc").get(0).value += "||sec||" + $(this).find("input").val() + "||ttl||" + $(this).find("textarea").val();
-	});
-	desc_hid.value = desc_hid.value.replace(/'/g, "&#39;").replace(/\u2013/g, "&#8211;");
-	return true;
+        $("#pr_disp").get(0).value = $(this).find("#pr").val();
+        
+        $("#prtpnt").get(0).value=$(this).find("#par_min").val()+"||@||"+$(this).find("#par_max").val(); 
+        
+        var desc_hid = $("#desc").get(0);
+        desc_hid.value = $("#intro").val();
+        $(".desc-sec").each(function(index) {
+            $("#desc").get(0).value += "||sec||" + $(this).find("input").val() + "||ttl||" + $(this).find("textarea").val();
+        });
+        desc_hid.value = desc_hid.value.replace(/'/g, "&#39;").replace(/\u2013/g, "&#8211;");
+        return true;
     });
-    //Filling descriptions
+
+    // #desc contains complete event description, divided into sections using separator ||sec||
     var descs = $("#desc").get(0).value.split("||sec||");
     if (descs.length > 0) {
-	update_preview($("#intro").val(descs[0]).get(0));
-	if (descs.length > 1) {
-	    var sec_data, i;
-	    for (i = 1; i<descs.length; i++) {
-		sec_data = descs[i].split("||ttl||");
-		new_desc_sec(sec_data[0], sec_data[1]);
-	    }
-	}
-    }
-    // Filling prizes and contacts
-    var prv = $("#pr_disp").get(0).value;
- 
-	$("#pr").get(0).value=prv;
-
-	var conv=$("#con_disp").get(0).value;
-    var cons=conv.split("||0||");
-    if(conv && cons.length>0)
-    {
-	var cnt,j,k;
-	for(j=0;j<3;j++)
-	{
-	    cnt=cons[j].split("||@||");
-	    k=j+1;
-	    $("#na"+k).get(0).value=cnt[0];
-	    $("#co"+k).get(0).value=cnt[1];
-	}
-    	$(".em").get(0).value=cnt[2];
+        update_preview($("#intro").val(descs[0]).get(0));
+        if (descs.length > 1) {
+            var sec_data, i;
+            for (i = 1; i<descs.length; i++) {
+            sec_data = descs[i].split("||ttl||"); // section: "<title>||ttl||<body>"
+            new_desc_sec(sec_data[0], sec_data[1]);
+            }
+        }
     }
     
-    var prtpnt=$("#prtpnt").get(0).value;
-    if(prtpnt!=1)
-    {
-	pnt=prtpnt.split("||@||");
-	$("#par_min").get(0).value=pnt[0];
-	$("#par_max").get(0).value=pnt[1];
+    // Fill prizes and contacts text boxes from #pr_disp and #con_disp
+    var prv = $("#pr_disp").get(0).value;
+	$("#pr").get(0).value=prv;
+	var conv=$("#con_disp").get(0).value;
+    var cons=conv.split("||0||");
+    if (conv && cons.length>0) {
+        var cnt,j,k;
+        for(j=0;j<3;j++) {
+            cnt=cons[j].split("||@||");
+            k=j+1;
+            $("#na"+k).get(0).value=cnt[0];
+            $("#co"+k).get(0).value=cnt[1];
+        }
+        $(".em").get(0).value=cnt[2];
     }
-    else if(prtpnt==1)
-    {
+    
+    // Fill participation limits (min & max) from #prtpnt
+    var prtpnt=$("#prtpnt").get(0).value;
+    if (prtpnt!=1) {
+        pnt=prtpnt.split("||@||");
+        $("#par_min").get(0).value=pnt[0];
+        $("#par_max").get(0).value=pnt[1];
+    } else if(prtpnt==1) {
         $("#par_min").get(0).value=1;
-	    $("#par_max").get(0).value=1;
+        $("#par_max").get(0).value=1;
     }
 });
   //-->

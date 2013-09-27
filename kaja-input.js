@@ -1,3 +1,4 @@
+// Ref: http://stackoverflow.com/questions/401593/understanding-what-goes-on-with-textarea-selection-with-javascript
 (function ($) {
   $.fn.get_selection = function () {
   var e = this.get(0);
@@ -54,16 +55,20 @@
 Before going further, you should be aware of the alternate approach called "editable iframe" [keywords: designMode, execCommand, WYSIWYG] [see also: http://www.quirksmode.org/dom/execCommand.html]
 Disclaimer: The following was a result of complete ignorance! The use and/or study of this is considered unhealthy...
 */
+
+// 'src' parameters of functions below denotes the DOM textarea element
 function update_preview(src, str) {
   if (typeof str == "string") {
 	$(src).nextAll(".view").html(str);
 	return;
   }
+  // Filter out tags which are not allowed
   src.value = src.value.replace(/<(?!\/|([biusqp]|br ?\/?|sup|sub|ul|ol|li|table|tr|td|th( style=['"][^'"]+['"])?|a href=['"][^'"]+['"]|center|img [^>]+)>)/g, "&lt;");
   src.value = src.value.replace(/<\/(?!([biusqpa]|sup|sub|ul|ol|li|center|table|tr|td|th)>)/g, "&lt;/");
   $(src).nextAll(".view").html(src.value);
 }
 function get_corrected_selection(src) {
+  // make the selection wrap around (or unwrap) partially selected html-tags at the ends
   var sel = $(src).get_selection();
   var invalidable1 = /^[^<]*>/.exec(sel.text), invalidable2 = /<[^>]*$/.exec(sel.text);
   var new_start = sel.start+(invalidable1 == null ? 0 : invalidable1[0].length);
@@ -75,11 +80,13 @@ function get_corrected_selection(src) {
   return sel;
 }
 function valid_selection_ends(src, sel) {
+  // check if the selection ends cuts an html-tag
   var invalidable1 = /<[^>]*$/.test(src.value.substring(sel.start-8, sel.start)), 
 	invalidable2 = /^[^<]*>/.test(src.value.substring(sel.end, sel.end+8));
   return !(invalidable1 || invalidable2);
 }
 function styler(src, tag) {
+  // handles buttons such as bold, italics, underline etc.
   var tag_o = "<"+tag+">", tag_c = "</"+tag+">";
   var sel = get_corrected_selection(src);
   if (sel.length == 0)
@@ -88,6 +95,7 @@ function styler(src, tag) {
   var start_pos = sel.start;
   var end_pos;
   var tag_o_i = sel.text.indexOf(tag_o), tag_c_i = sel.text.indexOf(tag_c), tag_c_li = sel.text.lastIndexOf(tag_c);
+  // each cases of selected contents is commented beside the if-conditions below
   if (tag_o_i == 0 && tag_c_li > 0 && tag_c_li == sel.length-tag_c.length) { //<tag>...</tag>
 	end_pos = sel.end - tag_o.length - tag_c.length;
 	src.value = src.value.substring(0, sel.start) + sel.text.substring(tag_o.length, sel.length-tag_c.length) + src.value.substring(sel.end);
@@ -129,6 +137,7 @@ function after_state1(state1_li, state2_li) {
   return (state1_li >= 0 && ((state2_li >= 0 && state1_li > state2_li) || state2_li < 0));
 }
 function enter_pressed(src, shifted) {
+  // handles the enter-key press event, with the second parameter indicating whether shift was pressed
   if (!shifted)
 	return true;
   var sel = $(src).get_selection();
@@ -235,6 +244,7 @@ function get_line(str, index) {
 	return {start: 0, end: str.length, text: str};
 }
 function lister(src, tag) {
+  // handles bulleting and numbering buttons
   var tag_o = "<"+tag+">", tag_c = "</"+tag+">", li_o = "\n<li>", li_c = "</li>\n";
   var sel = get_corrected_selection(src);
   var cursor_pos;

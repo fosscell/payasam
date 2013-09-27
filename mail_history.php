@@ -1,4 +1,5 @@
 <?php
+// To view the list of sent mails history
 require_once("config.php");
 session_start();
 if (isset($_SESSION["type"])) {
@@ -60,7 +61,7 @@ td:hover {
 <body>
   <h1>Tathva 12 mailer</h1>
   <a href="mail.php">Group mail</a>
-  <a href="mails_add.php">Add new mails</a>
+  <a href="mails_add.php">Add new eMails</a>
   Mail history
   <a href="logout.php">Log out</a><br/><br/>
   <table>
