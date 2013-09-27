@@ -1,4 +1,6 @@
 <?php
+// this is where content is entered for the appropriate event using an HTML editor.
+// content from the database will be filled in hidden text boxes and then populated to sections and other
 require_once("initdb.php");
 $eventcode = "";
 if (isset($_SESSION["type"])) {
@@ -15,12 +17,15 @@ if (isset($_SESSION["type"])) {
   _exit();
 }
 
-if (isset($_POST["prback"])) { // back button clicked (visible to only proofreaders)
+// back button clicked (visible to only proofreaders)
+// so that they can go back and select another event for proofreading.
+if (isset($_POST["prback"])) { 
   unset($_SESSION["ecode"]);
   header("Location: $pr_page");
   _exit();
 }
 
+// get the content from the database
 $query="SELECT name,shortdesc,longdesc,tags,contacts,prize,prtpnt FROM events WHERE code='$eventcode'";
 $result=$mysqli->query($query);
 $row=$result->fetch_assoc();
@@ -98,7 +103,7 @@ function new_desc_sec(title, content) {
     });
     var sec_ttl = $("<input type='text' />").appendTo(desc_head); //$(..).attr({name: 'xyz'})
 
-    // buttons: Remove, Down, Up
+    // dynamically creating buttons: Remove, Down, Up
     $("<span/>", {
         html: "Remove",
         class: "desc-but"
@@ -125,12 +130,18 @@ function new_desc_sec(title, content) {
             opacity: 'hide'
         }, 400, move_sec_down);
     });
+
+    //dynamically creating textarea
     var desc_src = document.createElement("textarea");
     new_section.hide();
     new_section.insertBefore(link);
     desc_head.appendTo(new_section);
     $(desc_src).appendTo(new_section);
+
+    //calling new kaja input to make a new section
     new_kaja_input(desc_src);
+
+    // scrolling down to shift view to the newly added section
     $('body,html').animate({
         scrollTop: '+=' + new_section.height()
     }, 400);
@@ -145,6 +156,8 @@ function new_desc_sec(title, content) {
 }
 
 $(document).ready(function () {
+
+    // creating the intro section which is the default section  
     new_kaja_input($("#intro"));
     $("#new_sec").click(function () {
         new_desc_sec();
@@ -154,6 +167,7 @@ $(document).ready(function () {
         $("#con_disp").get(0).value=null;
         $("#pr_disp").get(0).value=null;
         
+        //         
         $(".con").each(function(index) {
             $("#con_disp").get(0).value += $(this).find(".na").val()+"||@||"+$(this).find(".co").val()+"||@||"+$(".em").val()+"||0||";
         });
@@ -298,6 +312,9 @@ $(document).ready(function () {
 
       </div>
 
+      <!-- This hidden text is where the longdesc from the database is populated.-->
+      <!-- This content is then split and populated into various sections by creating them dynamically-->  
+      <!-- All of which is done using Jquery and Javascript-->    
       <input type="hidden" id="desc" name="longdesc" value="<?php echo str_replace('"', '&quot;', $longdesc);?>" />
 
       <center>

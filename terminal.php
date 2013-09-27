@@ -61,7 +61,7 @@ tr:hover {
 <body>
     <div style="text-align:right"><a href="logout.php">Log out</a></div>
     <?php
-// populating the admin panel for managers from the MANAGERS table
+// populating the admin panel for managers from the MANAGERS table in the Database
 $query="SELECT username, password, eventcode, validate FROM managers";
 $result=$mysqli->query($query);
 $row=$result->fetch_assoc();
@@ -75,6 +75,7 @@ else {
 	<tr><th>Username</th> <th>Password</th> <th>Eventcode</th> <th>Validation</th> <th>-del-</th></tr>
       </thead>
     <?php
+// populating the entire MANAGERS table using the while loop
     do {
 	$u = $row['username'];
 	$x = "exec.php?u=$u";
@@ -83,14 +84,17 @@ else {
 	$v .= ($row['validate'] == 0) ? "val'>Validate" : "inv'>Invalidate";
 	$v .= "</a>";
 // $v stores the link to exec.php which validates/invalidates accordingly
-// <a href='exec.php?u=$row['username']&a=(val/inv)'>Validate/Invalidate</a>
-// delete l      
+// validate link: <a href='exec.php?u=$row['username']&a=(val/inv)'>Validate/Invalidate</a>
+// delete link: <a href='exec.php?u=$row['username']&a=del'>Delete</a>       
 	echo "<tr> <td>$u</td> <td>$row[password]</td> <td>$row[eventcode]</td> <td>$v</td> <td><a href='$x&a=del'>Delete</a></td></tr>";
     } while($row=$result->fetch_array());
     ?></table><br/>
     <?php
 }
 
+// populating the admin panel for events from the EVENTS table in the Database
+// In the below SQL query, name of the event category is retrieved from the EVENT CATEGORY table and
+// the rest is fetched from EVENTS table
 $query="SELECT code, name, (SELECT name FROM event_cats WHERE event_cats.cat_id=events.cat_id) AS cat, shortdesc, longdesc, tags, contacts, prize, validate FROM events";
 $result=$mysqli->query($query);
 $row=$result->fetch_assoc();
@@ -105,6 +109,7 @@ else {
 	     <th>Prize</th> <th>Validation</th> <th>-del-</th></tr>
       </thead>
     <?php
+// validate/invalidate and delete are similar as in the MANAGERS table
     do {
 	$e = $row['code'];
 	$x = "exec.php?e=$e";

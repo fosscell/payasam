@@ -53,7 +53,6 @@
 
 /*
 Before going further, you should be aware of the alternate approach called "editable iframe" [keywords: designMode, execCommand, WYSIWYG] [see also: http://www.quirksmode.org/dom/execCommand.html]
-Disclaimer: The following was a result of complete ignorance! The use and/or study of this is considered unhealthy...
 */
 
 // 'src' parameters of functions below denotes the DOM textarea element

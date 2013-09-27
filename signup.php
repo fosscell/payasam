@@ -1,7 +1,8 @@
 <?php
-// this is where event managers signs up, and everyone logs in
+// This is where event managers signs up, and everyone logs in
 require_once("initdb.php");
 $msg = "";
+// if a session exists then redirect to the respective page
 if (isset($_SESSION['type'])) {
   switch ($_SESSION['type']) {
   case 'MN':
@@ -22,27 +23,37 @@ if (isset($_SESSION['type'])) {
   }
 }
 $erlist = "";
-if (isset($_POST["signup"])) { // Sign up button clicked
+// Sign up button clicked
+if (isset($_POST["signup"])) { 
   $s = 0;
+// if type is manager  
   if ($_POST["type"] == "mn") {
+// if an event manager signs up then insert into the MANAGERS table and if it is successful then insert into the EVENTS table     
     if (TRUE === $mysqli->query("INSERT INTO `managers` VALUES ('$_POST[ecode]', '$_POST[uname]', '$_POST[pass]', 0)")) {
+// converting single quote into the corresponding ascii code      
       if (TRUE === $mysqli->query("INSERT INTO `events`(`code`, `name`, `cat_id`) VALUES ('$_POST[ecode]', '".str_replace("'","&#39;",$_POST['ename'])."', '$_POST[category]')")) {
         $msg = "<span class='color'>Manager signup was successful!</span> ";
         $s = 1;
       } else
+// if populating the EVENTS table failed then the corresponding entry in the MANAGERS table is deleted.      
         $mysqli->query("DELETE FROM managers WHERE username='$_POST[uname]'");
     }
+// if type is proofreader    
   } else if (TRUE === $mysqli->query("insert into managers values ('-pr', '$_POST[uname]', '$_POST[pass]', 0)")) {
     $msg = "<span class='color'>Proofreader signup was successful!</span> ";
     $s = 1;
   }
   if ($s == 1)
+// if signup is succesful     
     $msg .= "<span class='color'>Please wait till an administrator validates your account.</span>";
-  else
+  else    
     $msg = "<span class='color'>Signup failed</span>";
-} else if (isset($_POST["signin"])) { // Sign in button clicked
+// Sign in button clicked  
+} else if (isset($_POST["signin"])) { 
+// real escaping strings to avoid SQL injection
   $user = $mysqli->real_escape_string($_POST['username']);
   $pass = $mysqli->real_escape_string($_POST['password']);
+// different login sessions
   if ($user == "admin" && $pass == "12tathva12") {
     $_SESSION['type'] = 'AD';
     header("Location: $ad_page");
@@ -56,7 +67,7 @@ if (isset($_POST["signup"])) { // Sign up button clicked
     header("Location: cl.php");
     _exit();
   }
-  // execution reached here means it could be an event manager trying to log in
+  // execution reached here means it could be an event manager/proofreader trying to log in
   $res = $mysqli->query("select eventcode, validate from managers where username='$user' and password='$pass'");
   if ($res->num_rows == 0)
     $msg = "<span class='color'>Invalid Username or Password!</span>";
@@ -69,9 +80,11 @@ if (isset($_POST["signup"])) { // Sign up button clicked
     } else {
       $_SESSION['uname'] = $user;
       if ($row['eventcode'] == '-pr') {
+      // if it is a proofreader then redirect to the proofreader page     
         $_SESSION['type'] = 'PR';
         header("Location: $pr_page");
       } else {
+      // if it is an event manager then redirect to the corresponding manager page        
         $_SESSION['type'] = 'MN';
         $_SESSION['ecode'] = $row['eventcode'];
         header("Location: $mn_page");
@@ -143,6 +156,7 @@ if (isset($_POST["signup"])) { // Sign up button clicked
   </style>
   <script type="text/javascript" src="jquery.min.js"></script>
   <script type="text/javascript">
+// form validation for signup
 function validatesup() {
   var un=this.uname.value;
   var p=this.pass.value;
@@ -171,7 +185,7 @@ function validatesup() {
 	return false;
   }
 }
-
+// form validation for signin
 function validatesin() {
   var u = this.username.value;
   var p = this.password.value;
@@ -183,6 +197,7 @@ function validatesin() {
 }
 
 $(document).ready(function() {
+// change options according to the type of account that is created (event manager/proofreader)  
   $("#acctype").change(function() {
   var c=$(this).val();
   if(c=="mn")
@@ -190,6 +205,7 @@ $(document).ready(function() {
   else
 	$("#mn_opts").hide();
   });
+// call the corresponding functions upon submission of the respective signup and signin forms  
   $("#supform").submit(validatesup);
   $("#sinform").submit(validatesin);
   $("#wrapper").show();
@@ -240,7 +256,7 @@ if ($erlist) {
       <select name="category">
         <option value="">--event category--</option>
         <?php
-// populate with event categories
+// populate with event categories from database
 $res1 = $mysqli->query("select cat_id, name from event_cats where par_cat=-1");
 while($row=$res1->fetch_assoc()) {
   $res2 = $mysqli->query("select cat_id, name from event_cats where par_cat=$row[cat_id]");
