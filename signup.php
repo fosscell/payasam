@@ -18,9 +18,6 @@ if (isset($_SESSION['type'])) {
   case 'CL':
     header("Location: cl.php");
     _exit();
-  case 'PL':
-    header("Location: pl.php");
-    _exit();
   }
 }
 $erlist = "";
@@ -56,10 +53,6 @@ if (isset($_POST["signup"])) {
   } else if ($user == "colleges" && $pass == "clist") {
     $_SESSION['type'] = 'CL';
     header("Location: cl.php");
-    _exit();
-  } else if ($user == "publicity" && $pass == "tpub") {
-    $_SESSION['type'] = 'PL';
-    header("Location: pl.php");
     _exit();
   }
   $res = $mysqli->query("select eventcode, validate from managers where username='$user' and password='$pass'");
