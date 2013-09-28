@@ -1,4 +1,15 @@
 <?php
+// This page is used to manage college names, while the main site is up and running.
+// When students signs up from the main site, they should be allowed to provide any
+// college name in case he/she cannot find his/her college in our list. In that case,
+// that college should be added to our list as "not validated". Publicly shown
+// college-list should contain only "validated" colleges. Here cases may arise:
+// 1. Multiple users register from an unlisted college (before it gets "validated").
+//    Since that college is not publicly listed, it will be added multiple times.
+//    In that case, we will validate one of it, and "migrate" all other registrations to it.
+// .......
+//    
+// Try using the "college" field from http://www.tathva.org/2012/
 require_once("config.php");
 session_start();
 if (isset($_SESSION["type"])) {
