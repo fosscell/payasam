@@ -57,7 +57,7 @@ if (isset($_POST['mail'])) {
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 <title>Tathva 12 Mailer</title>
-<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="scripts/jquery.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function () {
   $("#search").click(function () {

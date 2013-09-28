@@ -106,7 +106,7 @@ if (isset($_POST["signup"])) {
   @font-face
   {
 	font-family:Tathva_Cafe;
-	src:url("CafeNeroM54.ttf");
+	src:url("imgs/CafeNeroM54.ttf");
   }
   body {
 	background-image:url("cms.jpg");
@@ -154,7 +154,7 @@ if (isset($_POST["signup"])) {
 	z-index: 99;
   }
   </style>
-  <script type="text/javascript" src="jquery.min.js"></script>
+  <script type="text/javascript" src="scripts/jquery.min.js"></script>
   <script type="text/javascript">
 // form validation for signup
 function validatesup() {

@@ -53,9 +53,9 @@ $mysqli->close();
   <title>Tathva 12 CMS: Event Management</title>
   <link rel="shortcut icon" href="taticon.png" type="image/png" />
   <link rel="stylesheet" href="style/manager.css" type="text/css" media="all" />
-  <script type="text/javascript" src="jquery.min.js"></script>
-  <script type="text/javascript" src="ajaxupload.js"></script>
-  <script type="text/javascript" src="kaja-input.js"></script>
+  <script type="text/javascript" src="scripts/jquery.min.js"></script>
+  <script type="text/javascript" src="scripts/ajaxupload.js"></script>
+  <script type="text/javascript" src="scripts/kaja-input.js"></script>
   <script type="text/javascript"><!--
 
 // remove a section

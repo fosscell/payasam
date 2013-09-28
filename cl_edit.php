@@ -47,7 +47,7 @@ else
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 <title>Tathva 12 College List</title>
-<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="scripts/jquery.min.js"></script>
 
 </head>
 <body>

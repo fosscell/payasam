@@ -240,7 +240,7 @@ h4,h5 {
 .ax-progress-bar {
     height: 100%;
 	width: 0; 
-	background-image: url(loader.gif);
+	background-image: url(../imgs/loader.gif);
 }
 .ax-progress-info {
 	font: 16px 'Helvetica Neue',Helvetica,Arial,sans-serif;
