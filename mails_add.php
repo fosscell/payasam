@@ -49,10 +49,10 @@ if (isset($_POST['add'])) {
 
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-<title>Tathva 12 Mailer</title>
+<title>Mailer</title>
 </head>
 <body>
-  <h1>Tathva 12 mailer</h1>
+  <h1>Mailer</h1>
   <a href="mail.php">Group mail</a>
   Add new eMails
   <a href="mail_history.php">Mail history</a>

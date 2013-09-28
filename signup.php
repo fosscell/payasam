@@ -58,7 +58,7 @@ if (isset($_POST["signup"])) {
   $user = $mysqli->real_escape_string($_POST['username']);
   $pass = $mysqli->real_escape_string($_POST['password']);
   // different login sessions
-  if ($user == "admin" && $pass == "password") {
+  if ($user == $admin && $pass == $password) {
     $_SESSION['type'] = 'AD';
     header("Location: $ad_page");
     _exit();
