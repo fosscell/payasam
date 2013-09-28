@@ -113,8 +113,30 @@ if (isset($_POST["signup"])) {
     src:url("CafeNeroM54.ttf");
   }
   body {
-    background-image:url("imgs/cms.jpg");
-    background-size:100%;
+    background-color: #fff;
+  }
+  input
+  {
+    width:280px;
+    border:1px solid #e0e0e0;
+    margin:4px;
+    padding:4px 8px;
+  }
+  input[type=submit]
+  {
+    background-color: #aaa;
+    cursor:pointer;
+    border:1px solid #999;
+    margin:4px;
+    padding:4px 8px;
+    width:300px;
+    height:30px;
+  }
+  select
+  {
+    width:300px;
+    margin:4px;
+    height: 25px;
   }
   #wrapper {
     display: none;
@@ -125,27 +147,26 @@ if (isset($_POST["signup"])) {
   }
   #sinwrap, #supwrap {
     padding: 10px;
-    border: 1px solid gray;
+    border: 1px solid #e0e0e0;
     border-radius: 3px;
-    background-color: rgba(0,0,0,0.5);
-    color:white;
+    background-color:#f7f7f7;
+    color:#aaa;
     margin: 10px;
   }
-  #supwrap {
-    position:absolute;
-    top:250px;
-    right:100px;
+  #supwrap,#sinwrap {
+    width:310px;
+    float:right;
+    margin:10px 50px;
+    clear:right;
   }
-  #sinwrap {
-    position:absolute;
-    top:100px;
-    right:100px;
+ 
+  #sinwrap
+  {
+    margin-top:50px;
   }
+
   #sinwrap h3, #supwrap h3 {
     margin: 0 0 5px;
-  }
-  input[type=password], input[type=text] {
-    width: 180px;
   }
   .color
   {
@@ -156,6 +177,23 @@ if (isset($_POST["signup"])) {
     position: absolute;
     background: rgba(240,240,240,0.8);
     z-index: 99;
+  }
+  #title
+  {
+    background-color:#f7f7f7;
+    border:1px solid #e0e0e0;
+    float:left;
+    clear:both;
+    width:500px;
+    padding:220px 80px;
+    margin:50px;
+    color:#aaa;
+    font-size:35px; 
+  }
+
+  #title span
+  {
+    font-size: 50px;
   }
   </style>
   <script type="text/javascript" src="scripts/jquery.min.js"></script>
@@ -247,8 +285,16 @@ if ($erlist) {
   <div style="background-color: #FF7777; padding: 20px; font-size: 20px">Please enable Javascript</div>
   </noscript>
   <div id="wrapper">
-  <h1 style="color:black; position:relative; top:160px; font-family:Tathva_Cafe; ">CONTENT MANAGEMENT SYSTEM</h1>
   <?php echo $msg; ?>
+  <div id="title"><span>Payasam</span><br/>Content Management System</div>
+  <div id="sinwrap">
+  <form action="signup.php" method="post" id="sinform">
+    <h3>Login</h3>
+    <input type="text" placeholder="Username" name="username"><br/>
+    <input type="password" placeholder="Password" name="password"><br/>
+    <input type="submit" name="signin" value="Sign In">
+  </form>
+  </div>  
   <div id="supwrap">
   <form action="signup.php" method="post" id="supform">
     <h3>Not yet a member?</h3>
@@ -284,15 +330,6 @@ $res1->free();
       <input type="text" placeholder="Event Code (3 letters)" name="ecode" onchange="javascript:this.value=this.value.toUpperCase();"><br/>
     </div>
     <input type="submit" name="signup" value="Sign Up">
-  </form>
-  </div>
-
-  <div id="sinwrap">
-  <form action="signup.php" method="post" id="sinform">
-    <h3>Login</h3>
-    <input type="text" placeholder="Username" name="username"><br/>
-    <input type="password" placeholder="Password" name="password"><br/>
-    <input type="submit" name="signin" value="Sign In">
   </form>
   </div>
   </div>

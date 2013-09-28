@@ -46,7 +46,7 @@ Features of the CMS include:
 10. Can be used to send group mails.
 First you can add a group of email ids under a tag in the 'Add new emails' section. Then in the 'group mail' section you can select email ids from the appropriate selector tag. The emails which were selected under the selector tag and which are to be send can be assigned a sent marker tag. The next time the email ids are populated from the appropriate selector tag, those with the sent marker tag are not populated. The idea is to avoid the email ids which are already sent under the same selector tag.
 
-11. A facility has been provided for editing college names and migrating existing registered people to a different college ID. This is for people using different college names when registering for the Fest. 
+11. A facility has been provided for editing college names and migrating existing registered people to a different college ID. This is for people using ambigous college names when registering for the Fest. 
 	
 	For example in the college column:
 
@@ -57,6 +57,5 @@ First you can add a group of email ids under a tag in the 'Add new emails' secti
 	Either NIT Calicut can be edited to National Institute Of Technology Calicut
 	or NIT Calicut can be migrated to ID 102.
 	If there is repetition then 'ignore' can be used.
-	For the Addition of a new College into the auto completion list of colleges under online registration in the website,
-	use 'validate'.
+	For the Addition of a new College into the auto completion list of colleges under online registration in the website, use 'validate'.
 

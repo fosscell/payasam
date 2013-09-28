@@ -19,8 +19,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 .kaja-input {
 	display: block;
-	border: 1px solid #666666;
-	background-color: #DDDDD0;
+	border: 1px solid #aaa;
+	background-color: #eee;
 	padding: 10px 10px 0;
 	border-radius: 5px;
 	min-width: 480px;
@@ -39,7 +39,7 @@ input[type=text] {
 	font-size: 16px;
 	cursor: default;
 	display: inline-block;
-	border: 1px solid #888888;
+	border: 1px solid #aaa;
 	border-radius: 3px;
 	background-color: #E2E2DD;
 	min-width: 30px;
@@ -103,9 +103,10 @@ input[type=text] {
 	display: block;
 	width: 320px;
 	height: 100%;
-	background-color: #D6E9F0;
+	background-color: #eee;
 	padding: 0 15px 0 10px;
 	overflow: auto;
+	border-right:1px solid #aaa;
 }
 .main {
 	display: block;
@@ -133,9 +134,9 @@ h4,h5 {
 .desc-but {
 	cursor: default;
 	display: inline-block;
-	border: 1px solid #8888AA;
+	border: 1px solid #aaa;
 	border-radius: 3px;
-	background-color: #D2DDE2;
+	background-color: #ddd;
 	text-align: center;
 	padding: 5px 10px;
 	float: right;
