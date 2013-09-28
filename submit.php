@@ -1,6 +1,8 @@
 <?php
+// this page displays a view of the content entered for the event
 require_once("initdb.php");
 $eventcode = NULL; $redirect = TRUE;
+// redirect to start page if session for proofreader/manager is not set
 if (isset($_SESSION["type"])) {
     if ($_SESSION["type"] == 'MN' || $_SESSION["type"] == 'PR') {
         if (isset($_SESSION["ecode"])) {
@@ -16,7 +18,9 @@ if (isset($_SESSION["type"])) {
 if ($redirect)
     _exit();
 
+// All from data sent from manager.php is received and assigned to variables 
 if ($eventcode && isset($_POST['update'])) {
+    //single quotes replaced.
     $eventname=str_replace("'","&#39;",$_POST['ename']);
     $shortdesc=str_replace("'","&#39;",$_POST['shortdesc']);
     $tags=$_POST['tags'];
@@ -28,8 +32,10 @@ if ($eventcode && isset($_POST['update'])) {
 else
     _exit("Please go back and try again!");
 
+//inserting/updating into the database and thereby reflecting the changes made to the content
 $query="SELECT 1 FROM events WHERE code='$eventcode'";
 $result=$mysqli->query($query);
+//if the event is populated for the first time then INSERT SQL command is used.
 if($result->num_rows == 0)
 {
     $query="INSERT INTO events VALUES ('$eventcode', '$eventname', NULL, '$shortdesc', '$longdesc', '$tags', '$contacts', '$prizes', '$prtpnt', 0)";
@@ -37,7 +43,9 @@ if($result->num_rows == 0)
         echo "<p class='col'>Successfully Inserted!</p>";
     else
         echo "<p class='col'>Update failed:</p>".$mysqli->error;
-} else {
+}
+// UPDATE SQL command is used otherwise
+ else {
     $query="UPDATE events SET name='$eventname',shortdesc='$shortdesc',longdesc='$longdesc',tags='$tags',contacts='$contacts',prize='$prizes',prtpnt='$prtpnt' WHERE code='$eventcode'";
     if ($mysqli->query($query))
         echo "<p class='col'>Successfully updated!</p>";
@@ -53,6 +61,7 @@ if($result->num_rows == 0)
 <title>Update</title>
 
 <link rel="shortcut icon" href="taticon.png" type="image/png"/>
+<!-- CSS STYLES -->
 <style type="text/css">
 
 .col
@@ -110,8 +119,11 @@ img
 
 <script type="text/javascript">
 $(document).ready(function () {
+  // the longdesc data is split using the section separator ||sec|| into an array
   var desc = $("#data").get(0).value.split("||sec||");
   var i, sec;
+  // dynamically creating divs for populating the title and content for each section
+  // the number of divs created is equal to the number of splits done using the ||sec|| separator
   for (j = 0; j <= (desc.length + 2); j++) {
     $("<div/>", {
       "id": "lnk" + j
@@ -121,7 +133,12 @@ $(document).ready(function () {
     }).appendTo("#content");
   }
 
+  // function to handle css effects on clicking a title/link
+  // the appropriate content for the title is also displayed hiding the rest
   $("#link>div").click(function () {
+    // the title lnk<number> has content in cnt<number>
+    // the <number> of the the lnk<number> is obtained by splitting with separator lnk
+    // the <number> would be stored in i[1]   
     var i = $(this).attr("id").split("lnk");
     var t;
     if (!($(this).hasClass("link_select"))) {
@@ -141,11 +158,13 @@ $(document).ready(function () {
         "left": -10,
         "width": 174
       });
+      // all the contents except the one clicked are hidden
       for (t = 0; t <= (desc.length + 2); t++) {
         if (t != i[1]) {
           $("#cnt" + t).hide();
         }
       }
+      // content for the corresponding <number> is shown
       $("#cnt" + i[1]).show();
       $("#text").jScrollPane({
         showArrows: true
@@ -153,6 +172,8 @@ $(document).ready(function () {
     }
 
   });
+
+  // functions to handle mouseover and mouseout on the link
 
   $("#link>div").mouseover(function () {
     if (!($(this).hasClass("link_select"))) {
@@ -171,11 +192,15 @@ $(document).ready(function () {
     }
   });
 
+  // default content is populated
   $("#lnk0").append("<p><b>INTRODUCTION</b></p>");
   $("#cnt0").append("<p>" + desc[0] + "</p>");
   $("#text").jScrollPane({
     showArrows: true
   });
+
+  // note that all the sections were split using the separator ||sec|| and stored into an array desc
+  // desc is further split using ||ttl|| into title(sec[0]) and content(sec[1]) for that section
   for (i = 1; i < desc.length; i++) {
     sec = desc[i].split("||ttl||");
     $("#lnk" + i).append("<p><b>" + sec[0].toUpperCase() + "</b></p>");
@@ -183,12 +208,16 @@ $(document).ready(function () {
   }
   var k = desc.length;
 
+  // a div is dynamically created for storing the content for prizes and hidden
   var prize = $("#prize").get(0).value;
   if (prize.length > 0) {
     $("#cnt" + k).append("<br/>" + prize);
   }
   $("#cnt" + k).hide();
 
+  // a div is dynamically created for storing the content for contacts and hidden
+  // the content is split using ||0|| into various contacts
+  // each contact is split using ||@|| into name, contact and email respectively
   var con = $("#contact").get(0).value.split("||0||");
   if (con.length > 0) {
     var cnt, j, k;
@@ -204,6 +233,7 @@ $(document).ready(function () {
   }
   $("#cnt" + (k + 1)).hide();
 
+  // a div is dynamically created for storing the min/max participation and hidden
   var parpnt = $("#prtpnt").get(0).value.split("||@||");
   if (parpnt.length > 0) {
     $("#cnt" + (k + 2)).append("<br/><p>Min:" + parpnt[0] + "</p>");
@@ -211,6 +241,9 @@ $(document).ready(function () {
   }
   $("#cnt" + (k + 2)).hide();
 
+  // on click of prize/contact/participation the other content divs are hidden
+  // the respective content is shown and some CSS styles are also changed
+  
   $("#wrapper").on("click", "#prize", function () {
     var t;
     $("#link>div").removeClass("link_select");
@@ -276,6 +309,8 @@ $(document).ready(function () {
     <p><a class="col" href="manager.php">Return</a></p>
     <p><a class="col" href="logout.php">Log out</a></p>
 
+    <!-- hidden input fields for populating data from the form data sent from manager.php -->
+    <!-- the data is split and populated into dynamically created divs from these hidden input fields -->
     <input type="hidden" id="data" value="<?php echo str_replace(array('"',"&#39;"), array('&quot;','&amp;#39;'), $longdesc);?>"/>
     <input type="hidden" id="contact" value="<?php echo $contacts;?>"/>
     <input type="hidden" id="prize" value="<?php echo $prizes;?>"/>

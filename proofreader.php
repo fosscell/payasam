@@ -1,6 +1,7 @@
 <?php
 require_once("initdb.php");
 $erlist = '';
+// redirect for unauthorised access
 if (!isset($_SESSION['type']) || $_SESSION['type'] != "PR")
   _exit("You do not have access to this page");
 if (isset($_POST['prsubmit']) && $_POST['event']) {
@@ -28,6 +29,7 @@ if (isset($_SESSION['ecode'])) {
   <div style="text-align:right"><a href="logout.php">Log out</a></div>
   <form action="proofreader.php" method="post">
 	<select name="event">
+    <!-- populate the events options field with all event names from the EVENTS table in the database -->
 	  <option value="">--events--</option>
 	  <?php
 $res = $mysqli->query("SELECT code, name FROM events");
@@ -42,6 +44,7 @@ $res->free();
 	<input name="ersubmit" type="submit" value="Get Event Reg List">
   </form>
   <?php
+// populating the event reg list from the database
 if ($erlist) {
   echo "<h3 style='margin:10px 0'>$erlname Registration List</h3>";
   $res = $mysqli->query("SELECT e.team_id, e.tat_id, s.name as name, s.phone, s.email, c.name as clg FROM event_reg e INNER JOIN student_reg s ON e.tat_id=s.id INNER JOIN colleges c ON s.clg_id=c.id WHERE e.code='$erlist'");

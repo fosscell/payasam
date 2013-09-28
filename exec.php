@@ -1,14 +1,18 @@
 <?php
 require_once("initdb.php");
+// redirect for unauthorised access
 if (isset($_SESSION["type"])) {
     if ($_SESSION["type"] != 'AD')
 	_exit("Go away!");
 } else
     _exit("Who are you?");
+// setting username
 if (isset($_GET['u']))
     $u=$_GET['u'];
+// setting eventcode
 else if (isset($_GET['e']))
     $e=$_GET['e'];
+// setting type of operation (validate/invalidate/delete)
 if (isset($_GET['a']))
     $a = $_GET['a'];
 if ($u && $a) {
