@@ -26,34 +26,33 @@ $erlist = "";
 // Sign up button clicked
 if (isset($_POST["signup"])) { 
   $s = 0;
-// if type is manager  
+  // if type is manager  
   if ($_POST["type"] == "mn") {
-// if an event manager signs up then insert into the MANAGERS table and if it is successful then insert into the EVENTS table     
+    // if an event manager signs up then insert into the MANAGERS table and if it is successful then insert into the EVENTS table     
     if (TRUE === $mysqli->query("INSERT INTO `managers` VALUES ('$_POST[ecode]', '$_POST[uname]', '$_POST[pass]', 0)")) {
-// converting single quote into the corresponding ascii code      
+      // converting single quote into the corresponding ascii code      
       if (TRUE === $mysqli->query("INSERT INTO `events`(`code`, `name`, `cat_id`) VALUES ('$_POST[ecode]', '".str_replace("'","&#39;",$_POST['ename'])."', '$_POST[category]')")) {
         $msg = "<span class='color'>Manager signup was successful!</span> ";
         $s = 1;
       } else
-// if populating the EVENTS table failed then the corresponding entry in the MANAGERS table is deleted.      
+        // if populating the EVENTS table failed then the corresponding entry in the MANAGERS table is deleted.      
         $mysqli->query("DELETE FROM managers WHERE username='$_POST[uname]'");
     }
-// if type is proofreader    
+  // if type is proofreader
   } else if (TRUE === $mysqli->query("insert into managers values ('-pr', '$_POST[uname]', '$_POST[pass]', 0)")) {
     $msg = "<span class='color'>Proofreader signup was successful!</span> ";
     $s = 1;
   }
-  if ($s == 1)
-// if signup is succesful     
+  if ($s == 1) // if signup is succesful
     $msg .= "<span class='color'>Please wait till an administrator validates your account.</span>";
   else    
     $msg = "<span class='color'>Signup failed</span>";
-// Sign in button clicked  
+// Sign in button clicked 
 } else if (isset($_POST["signin"])) { 
-// real escaping strings to avoid SQL injection
+  // real escaping strings to avoid SQL injection
   $user = $mysqli->real_escape_string($_POST['username']);
   $pass = $mysqli->real_escape_string($_POST['password']);
-// different login sessions
+  // different login sessions
   if ($user == "admin" && $pass == "12tathva12") {
     $_SESSION['type'] = 'AD';
     header("Location: $ad_page");
@@ -75,16 +74,16 @@ if (isset($_POST["signup"])) {
     $row = $res->fetch_assoc();
     if ($row['validate'] == 0) {
       $msg = "<span class='color'>Your account needs to be validated!.</span>";
-	  $erlist = $row['eventcode'];
-	  if ($erlist == '-pr') $erlist = '';
-    } else {
+      $erlist = $row['eventcode'];
+      if ($erlist == '-pr') $erlist = '';
+    } else { // only a validated account can be used for editing event details
       $_SESSION['uname'] = $user;
       if ($row['eventcode'] == '-pr') {
-      // if it is a proofreader then redirect to the proofreader page     
+        // redirect to the proofreader page
         $_SESSION['type'] = 'PR';
         header("Location: $pr_page");
       } else {
-      // if it is an event manager then redirect to the corresponding manager page        
+        // redirect to the manager page with the corresponding event code set
         $_SESSION['type'] = 'MN';
         $_SESSION['ecode'] = $row['eventcode'];
         header("Location: $mn_page");
@@ -105,53 +104,53 @@ if (isset($_POST["signup"])) {
   <style type="text/css">
   @font-face
   {
-	font-family:Tathva_Cafe;
-	src:url("imgs/CafeNeroM54.ttf");
+    font-family:Tathva_Cafe;
+    src:url("imgs/CafeNeroM54.ttf");
   }
   body {
-	background-image:url("cms.jpg");
-	background-size:100%;
+    background-image:url("cms.jpg");
+    background-size:100%;
   }
   #wrapper {
-	display: none;
-	width: 100%;
-	min-width: 1024px;
-	margin: auto;
-	text-align: center;
+    display: none;
+    width: 100%;
+    min-width: 1024px;
+    margin: auto;
+    text-align: center;
   }
   #sinwrap, #supwrap {
-	padding: 10px;
-	border: 1px solid gray;
-	border-radius: 3px;
-	background-color: rgba(0,0,0,0.5);
-	color:white;
-	margin: 10px;
+    padding: 10px;
+    border: 1px solid gray;
+    border-radius: 3px;
+    background-color: rgba(0,0,0,0.5);
+    color:white;
+    margin: 10px;
   }
   #supwrap {
-	position:absolute;
-	top:250px;
-	right:100px;
+    position:absolute;
+    top:250px;
+    right:100px;
   }
   #sinwrap {
-	position:absolute;
-	top:100px;
-	right:100px;
+    position:absolute;
+    top:100px;
+    right:100px;
   }
   #sinwrap h3, #supwrap h3 {
-	margin: 0 0 5px;
+    margin: 0 0 5px;
   }
   input[type=password], input[type=text] {
-	width: 180px;
+    width: 180px;
   }
   .color
   {
-	color:white;
-	font-weight:bold;
+    color:white;
+    font-weight:bold;
   }
   #erlist {
-	position: absolute;
-	background: rgba(240,240,240,0.8);
-	z-index: 99;
+    position: absolute;
+    background: rgba(240,240,240,0.8);
+    z-index: 99;
   }
   </style>
   <script type="text/javascript" src="scripts/jquery.min.js"></script>
@@ -169,20 +168,20 @@ function validatesup() {
   var ecex=/^[A-Z]+$/;
 
   if (!un || !p || !rp || (t == "mn" && (!c || !en || !ec))) {
-	alert("Please fill in all the fields!");
-	return false;
+    alert("Please fill in all the fields!");
+    return false;
   }
   if (!un.match(unex)) {
-	alert("Username should contain only lowercase alphabets.");
-	return false;
+    alert("Username should contain only lowercase alphabets.");
+    return false;
   }
   if (p != rp) {
-	alert("Passwords don't match");
-	return false;
+    alert("Passwords don't match");
+    return false;
   }
   if(t == "mn" && (ec.length!=3 || !ec.match(ecex))) {
-	alert("Event code must be 3 alphabets.");
-	return false;
+    alert("Event code must be 3 alphabets.");
+    return false;
   }
 }
 // form validation for signin
@@ -191,21 +190,21 @@ function validatesin() {
   var p = this.password.value;
 
   if(!u || !p) {
-	alert("Please fill in all the fields");
-	return false;
+    alert("Please fill in all the fields");
+    return false;
   }
 }
 
 $(document).ready(function() {
-// change options according to the type of account that is created (event manager/proofreader)  
+  // change options according to the type of account that is created (event manager/proofreader)  
   $("#acctype").change(function() {
   var c=$(this).val();
   if(c=="mn")
-	$("#mn_opts").show();
+    $("#mn_opts").show();
   else
-	$("#mn_opts").hide();
+    $("#mn_opts").hide();
   });
-// call the corresponding functions upon submission of the respective signup and signin forms  
+  // call the corresponding functions upon submission of the respective signup and signin forms  
   $("#supform").submit(validatesup);
   $("#sinform").submit(validatesin);
   $("#wrapper").show();
@@ -216,23 +215,25 @@ $(document).ready(function() {
 
 <body>
   <?php
+// When in 'proofreading' phase, manager accounts are invalidated.
+// After that, he/she, when tries to sign in, will be provided with the event registration list of his/her event.
 if ($erlist) {
   $res = $mysqli->query("SELECT name FROM events WHERE code='$erlist'");
   if ($row=$res->fetch_assoc()) {
-	$erlname = $row['name'];
-	$res->free();
-	echo "<div id='erlist'><h3 style='margin:10px 0'>$erlname Registration List</h3>";
+    $erlname = $row['name'];
+    $res->free();
+    echo "<div id='erlist'><h3 style='margin:10px 0'>$erlname Registration List</h3>";
   ?>
   <table>
     <tr><th>Team ID</th><th>Tathva ID</th><th>Name</th><th>Phone no.</th><th>eMail</th><th>College</th></tr>
     <?php
-	$res = $mysqli->query("SELECT e.team_id, e.tat_id, s.name as name, s.phone, s.email, c.name as clg FROM event_reg e INNER JOIN student_reg s ON e.tat_id=s.id INNER JOIN colleges c ON s.clg_id=c.id WHERE e.code='$erlist'");
-	while($row=$res->fetch_assoc())
-	  echo "<tr><td>$row[team_id]</td><td>$row[tat_id]</td><td>$row[name]</td><td>$row[phone]</td><td>$row[email]</td><td>$row[clg]</td></tr>";
+    $res = $mysqli->query("SELECT e.team_id, e.tat_id, s.name as name, s.phone, s.email, c.name as clg FROM event_reg e INNER JOIN student_reg s ON e.tat_id=s.id INNER JOIN colleges c ON s.clg_id=c.id WHERE e.code='$erlist'");
+    while($row=$res->fetch_assoc())
+      echo "<tr><td>$row[team_id]</td><td>$row[tat_id]</td><td>$row[name]</td><td>$row[phone]</td><td>$row[email]</td><td>$row[clg]</td></tr>";
     ?>
   </table></div>
   <?php
-	$res->free();
+    $res->free();
   } else $res->free();
 }
   ?>
