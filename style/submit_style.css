@@ -119,7 +119,6 @@
 	-moz-transition:background-color 0.4s,color 0.4s;
 	-o-transition:background-color 0.4s,color 0.4s;
 	transition:background-color 0.4s,color 0.4s;
-
 }
 
 #panel_inner .panel 
@@ -148,7 +147,6 @@
     -moz-transition:border-bottom-color 0.4s;
     -o-transition:border-bottom-color 0.4s;
     transition:border-bottom-color 0.4s;
-
 }
 
 #panel_inner .pnl p
@@ -248,7 +246,6 @@
 	left:169px;
 	top:70px;
 	z-index:2;
-	
 }
 
 #register
@@ -263,7 +260,6 @@
 	font-family:Cafe_Tathva;
 	text-align:center;
 	background-color:rgba(0,0,0,0.5);
-	
 }
 
 #register p
@@ -280,7 +276,6 @@
 	width:75px;
 	cursor:pointer;
     font-weight:bold;
-    
 }
 
 #prize
@@ -292,8 +287,6 @@
 	width:75px;
 	cursor:pointer;
     font-weight:bold;
-
-
 }
 
 #participant
@@ -305,8 +298,6 @@
 	width:75px;
 	cursor:pointer;
     font-weight:bold;
-
-	
 }
 
 p

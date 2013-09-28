@@ -348,9 +348,9 @@ function new_kaja_input(src) {
   $("<span/>", {"class": "ki-but", html: "<q>q</q>", title: "Quotes"}).click({tag: "q"}, styler_click).insertBefore(src);
   $("<span/>", {"class": "ki-but sups", html: "X<sup>2</sup>", title: "Superscript"}).click({tag: "sup"}, styler_click).insertBefore(src);
   $("<span/>", {"class": "ki-but", html: "X<sub>2</sub>", title: "Subscript"}).click({tag: "sub"}, styler_click).insertBefore(src);
-  $("<span/>", {"class": "ki-but", html: "<img src=\"style/bull.png\" alt=\"Bulleting\" />", title: "Bulleting"}).click({tag: "ul"}, lister_click).insertBefore(src);
-  $("<span/>", {"class": "ki-but", html: "<img src=\"style/num.png\" alt=\"Numbering\" />", title: "Numbering"}).click({tag: "ol"}, lister_click).insertBefore(src);
-  $("<span/>", {"class": "ki-but", html: "<img src=\"style/img.png\" alt=\"Insert image\" />", title: "Insert image"}).click(ins_img_click).insertBefore(src);
+  $("<span/>", {"class": "ki-but", html: "<img src=\"imgs/bull.png\" alt=\"Bulleting\" />", title: "Bulleting"}).click({tag: "ul"}, lister_click).insertBefore(src);
+  $("<span/>", {"class": "ki-but", html: "<img src=\"imgs/num.png\" alt=\"Numbering\" />", title: "Numbering"}).click({tag: "ol"}, lister_click).insertBefore(src);
+  $("<span/>", {"class": "ki-but", html: "<img src=\"imgs/img.png\" alt=\"Insert image\" />", title: "Insert image"}).click(ins_img_click).insertBefore(src);
   $("<span/>", {"class": "ki-but long", html: "Preview"}).insertBefore(src);
   $("<span/>", {"class": "ki-but long", html: "Help"}).click(help_click).insertBefore(src);
   $("<span/>", {"class":"clear"}).insertBefore(src);
