@@ -167,15 +167,20 @@ $(document).ready(function () {
         $("#con_disp").get(0).value=null;
         $("#pr_disp").get(0).value=null;
         
-        //         
+        // collecting and joining content from different contacts fields in the following format into the hidden input area for contact
+        // <name>||@||<contact>||@||<email>||0||<name>||@||<contact>||@||<email>||0|| ..        
         $(".con").each(function(index) {
             $("#con_disp").get(0).value += $(this).find(".na").val()+"||@||"+$(this).find(".co").val()+"||@||"+$(".em").val()+"||0||";
         });
 
+        // populating prize html content into the hidden input area for prize
         $("#pr_disp").get(0).value = $(this).find("#pr").val();
-        
+
+        // collecting and joining content from min and max participation in the following format into the hidden input area for participation
+        // <name>||@||<contact>||@||<email>||0||<name>||@||<contact>||@||<email>||0|| ..        
         $("#prtpnt").get(0).value=$(this).find("#par_min").val()+"||@||"+$(this).find("#par_max").val(); 
         
+        // 
         var desc_hid = $("#desc").get(0);
         desc_hid.value = $("#intro").val();
         $(".desc-sec").each(function(index) {
@@ -185,6 +190,7 @@ $(document).ready(function () {
         return true;
     });
 
+    // format: <title>||ttl||<body>||sec||<title>||ttl||<body>||sec||
     // #desc contains complete event description, divided into sections using separator ||sec||
     var descs = $("#desc").get(0).value.split("||sec||");
     if (descs.length > 0) {
@@ -232,6 +238,8 @@ $(document).ready(function () {
 <body>
 
   <div class="left">
+   <!-- If proofreader then 'Go back' option is present so as to allow the proofreader
+        to go back and switch the event content to proofread--> 
 	<?php if ($_SESSION["type"] == 'PR') { ?>
 	<form method="post" action="manager.php" name="back_form">
 	  <input type="submit" style="float:right" name="prback" value="Go Back" >
@@ -279,7 +287,7 @@ $(document).ready(function () {
           <div style="margin-left: 36px"><input type="text" class="co" id="co3" placeholder="Contact Number" /></div>
 
         </div>
-
+        <!-- Hidden input where contact information from the database is populated -->
         <input type="hidden" name="contacts" id="con_disp" value="<?php echo $contacts;?>" />
       </div>
 
@@ -292,6 +300,7 @@ $(document).ready(function () {
           </tr>
 
         </table>
+        <!-- Hidden input where the prizes information from the database is populated -->
         <input type="hidden" name="prizes" id="pr_disp" value="<?php echo $prize;?>" />
       </div>
 
@@ -306,6 +315,7 @@ $(document).ready(function () {
             <td style="text-align: right">Max: </td>
             <td> <input id="par_max" type="text" style="width:150px"/></td>
           </tr>
+          <!-- Hidden input where the participant information from the database is populated -->
           <input type="hidden" name="prtpnt" id="prtpnt" value="<?php echo $prtpnt;?>" />
 
         </table> 
@@ -318,6 +328,7 @@ $(document).ready(function () {
       <input type="hidden" id="desc" name="longdesc" value="<?php echo str_replace('"', '&quot;', $longdesc);?>" />
 
       <center>
+        <!-- update button -->
         <input name="update" type="submit" value="Update" />
       </center>
     </form>
@@ -327,6 +338,7 @@ $(document).ready(function () {
   <div class="main">
     <h2>Introduction</h2>
     <textarea id="intro" name="intro"></textarea>
+    <!-- button for adding new sections -->  
     <a href="javascript:void(0)" id="new_sec">+section</a>
   </div>
 </body>

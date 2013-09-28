@@ -215,7 +215,7 @@ if(isset($_FILES['ax-files']))
 }
 elseif(isset($_REQUEST['ax-file-name'])) 
 {
-	//check only the first peice
+	//check only the first piece
 	$fullPath = ($currByte!=0) ? $uploadPath.$fileName:checkFilename($fileName, $html5fsize);
 	
 	if($fullPath)
