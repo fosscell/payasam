@@ -102,12 +102,13 @@ $(document).ready(function () {
   i++;
 
   for (i = desc.length-1; i >= 0; i--)
-    $("#menu").prepend("<li><a class='section' href='#" + i + "'>" + desc[i] + "</a></li>");
+    $("#menu").prepend("<li><a class='section' rel='sec-" + i + "' href='javascript:;'>" + desc[i][0] + "</a></li>");
 
-  $("#menu").on(".section", "click", function() {
-    var i = int($(this).attr("href").substr(1));
+  $("#menu").on("click", "a.section", function() {
+    var i = $(this).attr("rel").substr(4);
     $("#subhead").html(desc[i][0]);
     $("#content").html(desc[i][1]);
+    return false;
   });
 });
 </script>
@@ -116,9 +117,6 @@ $(document).ready(function () {
 <body>
     <h1><?php echo $eventname;?></h1>
     <ul id="menu">
-        <li><a class="prizes" href="javascript:;">Prizes</a></li>
-        <li><a class="contacts" href="javascript:;">Contacts</a></li>
-        <li><a class="partlim" href="javascript:;">Participation Limits</a></li>
         <li><a href="manager.php">Return</a></li>
         <li><a href="logout.php">Log out</a></li>
     </ul>
