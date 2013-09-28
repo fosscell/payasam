@@ -1,4 +1,6 @@
 <?php
+// This page can be used to add a large list of colleges as "validated".
+// This page is not linked from anywhere since this will only be useful initially!
 require_once("config.php");
 session_start();
 if (isset($_SESSION["type"])) {

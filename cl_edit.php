@@ -1,4 +1,5 @@
 <?php
+// This page handles edit college name requests.
 require_once("config.php");
 session_start();
 if (isset($_SESSION["type"])) {
@@ -10,9 +11,9 @@ if (isset($_SESSION["type"])) {
   exit();
 }
 
-if (isset($_GET['id']))
+if (isset($_GET['id'])) // request received
   $id=$_GET['id'];
-else if (isset($_POST['id']) && isset($_POST['name'])) {
+else if (isset($_POST['id']) && isset($_POST['name'])) { // Update button clicked from this page
   $id=$_POST['id'];
   $name=$_POST['name'];
 } else
