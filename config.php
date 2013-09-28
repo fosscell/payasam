@@ -8,7 +8,9 @@ $host = 'localhost';
 $db_name = 'tathva';
 $db_user = 'root';
 $db_password = 'pass';
-
+// Admin username and password
+$admin="admin";
+$password="password";
 // The following variables are used to store page names which are used for redirection and inclusion
 //	throughout the CMS
 $start_page = 'signup.php';

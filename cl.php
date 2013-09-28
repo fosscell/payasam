@@ -32,7 +32,7 @@ if ($mysqli->connect_errno)
 
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-<title>Tathva 12 College List</title>
+<title>College List</title>
 <script type="text/javascript" src="scripts/jquery.min.js"></script>
 <script type="text/javascript">
 $(function () {
@@ -50,7 +50,7 @@ $(function () {
 </script>
 </head>
 <body>
-  <h1>Tathva 12 College List</h1>
+  <h1>College List</h1>
   <a href="logout.php">Log out</a>
   <table id="ctable">
 	<tr><th>Id</th><th>Name</th><th>Editing</th><th>Validation</th><th>Ignore</th><th>Students Name and Phone</th><th>Migrate</th></tr>
