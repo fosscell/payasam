@@ -1,6 +1,6 @@
 ﻿body
 {
-	background-color:#141845;
+
 	margin:0px;
 }
 
@@ -13,7 +13,6 @@
 /*head*/
 #head
 {
-	background-color:black;
 	height:40px;
 	width:100%;
 }
@@ -191,10 +190,23 @@
 	background-color:black;
     z-index:3;
     color:white;
-    font-family:Cafe_Tathva;
     font-size:30px;
     padding-top:16px;
     text-align:center;
+}
+
+#heading p
+{
+    position:absolute;
+    top:0px;
+    left:0px;
+    height:65px;
+    width:566px;
+    text-align:center;
+    margin:0px;
+    font-size:32px;
+    padding-top:12px;
+    color:white;
 }
 
 #link
@@ -205,11 +217,9 @@
 	height:360px;
 	width:164px;
 	color:silver;
-	background-color:black;
 	text-align:right;
 	z-index:1;
 	padding-top:40px;
-	
 }
 
 #link p
@@ -246,6 +256,7 @@
 	left:169px;
 	top:70px;
 	z-index:2;
+	border-left:1px solid #ddd;
 }
 
 #register

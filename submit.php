@@ -78,20 +78,6 @@ if($result->num_rows == 0)
 	text-align:center;
 }
 
-#heading p
-{
-    position:absolute;
-    top:0px;
-    left:0px;
-    height:65px;
-    width:566px;
-    text-align:center;
-    margin:0px;
-    font-size:32px;
-    padding-top:12px;
-    color:white;
-}
-
 #text
 {
 	height:342px;
