@@ -1,4 +1,5 @@
 <?php
+// This page handles Validate, Ignore and Migrate requests from the main page.
 require_once("config.php");
 session_start();
 if (isset($_SESSION["type"])) {
@@ -22,11 +23,11 @@ $mysqli = new mysqli($host,$db_user,$db_password,$db_name);
 if ($mysqli->connect_errno)
   die("Connect failed: ".$mysqli->connect_error);
 
-if ($do == 'ign')
+if ($do == 'ign') // Ignore request
   $query="UPDATE colleges SET validated=-1 WHERE id='$id'";
-else if ($do == 'val')
+else if ($do == 'val') // Validate request
   $query="UPDATE colleges SET validated=1 WHERE id='$id'";
-else if ($do == 'mig' && $dest)
+else if ($do == 'mig' && $dest) // Migrate request
   $query="UPDATE student_reg SET clg_id='$dest' WHERE clg_id='$id'";
 else
   echo "Invalid request!!!";

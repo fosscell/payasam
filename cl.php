@@ -2,14 +2,16 @@
 // This page is used to manage college names, while the main site is up and running.
 // When students signs up from the main site, they should be allowed to provide any
 // college name in case he/she cannot find his/her college in our list. In that case,
-// that college should be added to our list as "not validated". Publicly shown
-// college-list should contain only "validated" colleges. Here cases may arise:
+// that college should be added to our list as "not validated".
+// This page lists colleges that are "not validated"
+// Publicly shown college-list should contain only "validated" colleges. Here cases may arise:
 // 1. Multiple users register from an unlisted college (before it gets "validated").
 //    Since that college is not publicly listed, it will be added multiple times.
 //    In that case, we will validate one of it, and "migrate" all other registrations to it.
-// .......
-//    
-// Try using the "college" field from http://www.tathva.org/2012/
+// 2. Prank user registers with a bad college name. "Ignore" them. Ignored items should
+//    not show up here thereafter.
+// 
+// TODO: When "Migrate"-ing, we should input college id into the field that appears. Autocomplete can help.
 require_once("config.php");
 session_start();
 if (isset($_SESSION["type"])) {
@@ -35,7 +37,7 @@ if ($mysqli->connect_errno)
 <script type="text/javascript">
 $(function () {
   $("#ctable").on("click", "a.migrate", function () {
-	$(document.migform.id).val($(this).attr("href").substr(1));
+	$(document.migform.id).val($(this).attr("href").substr(1)); // href of migrate is be like: "#<college id>"
 	var r = this.getBoundingClientRect();
 	$(document.migform.dest).css({
 	  left: r.left + this.offsetWidth,
@@ -51,24 +53,17 @@ $(function () {
   <h1>Tathva 12 College List</h1>
   <a href="logout.php">Log out</a>
   <table id="ctable">
-	<tr><th>id</th><th>name</th><th>editing</th><th>validation</th><th>ignore</th><th>student name</th><th>his/her phone</th><th>migrate</th></tr>
+	<tr><th>Id</th><th>Name</th><th>Editing</th><th>Validation</th><th>Ignore</th><th>Students Name and Phone</th><th>Migrate</th></tr>
 <?php
-$result = $mysqli->query("SELECT id, name, (SELECT id FROM student_reg WHERE clg_id=colleges.id limit 1) as st_id FROM colleges WHERE validated=0");
-$tid = 0;
-$stmt = $mysqli->prepare("SELECT name, phone FROM student_reg WHERE id=?");
-$stmt->bind_param("i", $tid);
+$result = $mysqli->query("SELECT id, name, (SELECT group_concat(concat(name, ' (', phone, ')') SEPARATOR '<br/>') FROM student_reg WHERE clg_id=colleges.id) as students FROM colleges WHERE validated=0");
 
-$name = ""; $phone = "";
 while ($row = $result->fetch_assoc()) {
-  $tid = $row['st_id'];
-  $stmt->execute();
-  $stmt->bind_result($name, $phone);
-  echo "<tr><td>$row[id]</td><td>$row[name]</td><td><a href=\"cl_edit.php?id=$row[id]\">Edit</a></td><td><a href=\"cl_exec.php?id=$row[id]&do=val\">Validate</a></td><td><a href=\"cl_exec.php?id=$row[id]&do=ign\">Ignore</a></td>";
-  if ($stmt->fetch())
-	echo "<td>$name</td><td>$phone</td>";
-  else
-	echo "<td></td><td></td>";
-  echo "<td><a class=\"migrate\" href=\"#$row[id]\">Migrate</a></td></tr>";
+  echo "<tr><td>$row[id]</td><td>$row[name]</td>";
+  echo "<td><a href=\"cl_edit.php?id=$row[id]\">Edit</a></td>";
+  echo "<td><a href=\"cl_exec.php?id=$row[id]&do=val\">Validate</a></td>";
+  echo "<td><a href=\"cl_exec.php?id=$row[id]&do=ign\">Ignore</a></td>";
+  echo "<td>$row[students]</td>";
+  echo "<td><a class=\"migrate\" href=\"#$row[id]\">Migrate</a></td></tr>"; // when clicked, 'migform' will be shown beside it.
 }
 $stmt->close();
 $mysqli->close();
