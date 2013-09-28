@@ -4,7 +4,7 @@
 // 1. When a user with multiple privileges signs in, he should be redirected to a "menu" page.
 //    For example, an event manager should also be given a choice to view his/her event's registration list
 //                 this "menu" page may replace proofreader.php
-// 2. College list management accounts and Mailer accounts should be sign-up-able with admin verification
+// 2. Admin should hava all privilages.
 require_once("initdb.php");
 $msg = "";
 // if a session exists then redirect to the respective page
@@ -44,7 +44,7 @@ if (isset($_POST["signup"])) {
         $mysqli->query("DELETE FROM managers WHERE username='$_POST[uname]'");
     }
   // if type is proofreader
-  } else if (TRUE === $mysqli->query("insert into managers values ('-pr', '$_POST[uname]', '$_POST[pass]', 0)")) {
+  } else if (TRUE === $mysqli->query("insert into managers values ('-$_POST[type]', '$_POST[uname]', '$_POST[pass]', 0)")) {
     $msg = "<span class='color'>Proofreader signup was successful!</span> ";
     $s = 1;
   }
@@ -58,17 +58,9 @@ if (isset($_POST["signup"])) {
   $user = $mysqli->real_escape_string($_POST['username']);
   $pass = $mysqli->real_escape_string($_POST['password']);
   // different login sessions
-  if ($user == "admin" && $pass == "12tathva12") {
+  if ($user == "admin" && $pass == "password") {
     $_SESSION['type'] = 'AD';
     header("Location: $ad_page");
-    _exit();
-  } else if ($user == "mailer" && $pass == "tmailer") {
-    $_SESSION['type'] = 'ML';
-    header("Location: $ml_page");
-    _exit();
-  } else if ($user == "colleges" && $pass == "clist") {
-    $_SESSION['type'] = 'CL';
-    header("Location: cl.php");
     _exit();
   }
   // execution reached here means it could be an event manager/proofreader trying to log in
@@ -87,7 +79,18 @@ if (isset($_POST["signup"])) {
         // redirect to the proofreader page
         $_SESSION['type'] = 'PR';
         header("Location: $pr_page");
-      } else {
+      }
+      else if($row['eventcode'] == '-cl') {
+        //redirect to the colleges page
+        $_SESSION['type'] = 'CL';
+        header("Location: cl.php");
+      }
+      else if($row['eventcode'] == '-ml') {
+        //redirect to the mailer page
+        $_SESSION['type'] = 'ML';
+        header("Location: $ml_page");
+      }
+      else {
         // redirect to the manager page with the corresponding event code set
         $_SESSION['type'] = 'MN';
         $_SESSION['ecode'] = $row['eventcode'];
@@ -104,13 +107,13 @@ if (isset($_POST["signup"])) {
 <head>
   <meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
 
-  <title>Tathva 12 CMS: Start here!</title>
+  <title>Payasam CMS: Start here!</title>
   <link rel="shortcut icon" href="taticon.png" type="image/png">
   <style type="text/css">
   @font-face
   {
-    font-family:Tathva_Cafe;
-    src:url("CafeNeroM54.ttf");
+    font-family:helvetica;
+    src:url("fonts/helvetica.woff");
   }
   body {
     background-color: #fff;
@@ -170,7 +173,7 @@ if (isset($_POST["signup"])) {
   }
   .color
   {
-    color:white;
+    color:#777;
     font-weight:bold;
   }
   #erlist {
@@ -185,10 +188,11 @@ if (isset($_POST["signup"])) {
     float:left;
     clear:both;
     width:500px;
-    padding:220px 80px;
+    padding:200px 80px;
     margin:50px;
     color:#aaa;
     font-size:35px; 
+    font-family: helvetica;
   }
 
   #title span
@@ -239,7 +243,7 @@ function validatesin() {
 }
 
 $(document).ready(function() {
-  // change options according to the type of account that is created (event manager/proofreader)  
+  // hide/show fields according to the type of account that is created (event manager/proofreader/colleges/mailer)  
   $("#acctype").change(function() {
   var c=$(this).val();
   if(c=="mn")
@@ -269,7 +273,7 @@ if ($erlist) {
     echo "<div id='erlist'><h3 style='margin:10px 0'>$erlname Registration List</h3>";
   ?>
   <table>
-    <tr><th>Team ID</th><th>Tathva ID</th><th>Name</th><th>Phone no.</th><th>eMail</th><th>College</th></tr>
+    <tr><th>Team ID</th><th>ID</th><th>Name</th><th>Phone no.</th><th>eMail</th><th>College</th></tr>
     <?php
     $res = $mysqli->query("SELECT e.team_id, e.tat_id, s.name as name, s.phone, s.email, c.name as clg FROM event_reg e INNER JOIN student_reg s ON e.tat_id=s.id INNER JOIN colleges c ON s.clg_id=c.id WHERE e.code='$erlist'");
     while($row=$res->fetch_assoc())
@@ -304,6 +308,8 @@ if ($erlist) {
     <select id="acctype" name="type">
       <option value="mn">Event Manager</option>
       <option value="pr">Proofreader</option>
+      <option value="cl">Colleges</option>
+      <option value="ml">Mailer</option>      
     </select><br/>
     <div id="mn_opts">
       <select name="category">

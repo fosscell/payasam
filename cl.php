@@ -33,7 +33,7 @@ if ($mysqli->connect_errno)
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 <title>Tathva 12 College List</title>
-<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="scripts/jquery.min.js"></script>
 <script type="text/javascript">
 $(function () {
   $("#ctable").on("click", "a.migrate", function () {
@@ -65,7 +65,6 @@ while ($row = $result->fetch_assoc()) {
   echo "<td>$row[students]</td>";
   echo "<td><a class=\"migrate\" href=\"#$row[id]\">Migrate</a></td></tr>"; // when clicked, 'migform' will be shown beside it.
 }
-$stmt->close();
 $mysqli->close();
 ?>
   </table>

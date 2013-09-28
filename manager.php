@@ -50,7 +50,7 @@ $mysqli->close();
 <head>
   <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 
-  <title>Tathva 12 CMS: Event Management</title>
+  <title>Payasam CMS</title>
   <link rel="shortcut icon" href="taticon.png" type="image/png" />
   <link rel="stylesheet" href="style/manager.css" type="text/css" media="all" />
   <script type="text/javascript" src="scripts/jquery.min.js"></script>
@@ -260,7 +260,7 @@ $(document).ready(function () {
         <h4>Contacts:</h4>
         <h5>Event email-id</h5>
         <div class="email">
-          <div style="float:right; padding: 3px">@tathva.org</div>
+          <div style="float:right; padding: 3px">@website.org</div>
           <div style="margin-right: 96px"><input type="text" class="em" id="em3" placeholder="eMail" /></div>
         </div>
 

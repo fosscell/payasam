@@ -19,7 +19,7 @@ if ($mysqli->connect_errno)
 
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-<title>Tathva 12 Mailer</title>
+<title>Mailer</title>
 <style type="text/css">
 body
 {
@@ -59,7 +59,7 @@ td:hover {
 </style>
 </head>
 <body>
-  <h1>Tathva 12 mailer</h1>
+  <h1>mailer</h1>
   <a href="mail.php">Group mail</a>
   <a href="mails_add.php">Add new eMails</a>
   Mail history

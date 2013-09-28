@@ -21,7 +21,7 @@ if (isset($_SESSION['ecode'])) {
 
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-<title>Tathva 12 CMS: Proofreaders Corner</title>
+<title>CMS: Proofreaders Corner</title>
 <link rel="shortcut icon" href="taticon.png" type="image/png"/>
 </head>
 
@@ -50,7 +50,7 @@ if ($erlist) {
   $res = $mysqli->query("SELECT e.team_id, e.tat_id, s.name as name, s.phone, s.email, c.name as clg FROM event_reg e INNER JOIN student_reg s ON e.tat_id=s.id INNER JOIN colleges c ON s.clg_id=c.id WHERE e.code='$erlist'");
   ?>
   <table>
-	<tr><th>Team ID</th><th>Tathva ID</th><th>Name</th><th>Phone no.</th><th>eMail</th><th>College</th></tr>
+	<tr><th>Team ID</th><th>ID</th><th>Name</th><th>Phone no.</th><th>eMail</th><th>College</th></tr>
 	<?php
   while($row=$res->fetch_assoc())
 	echo "<tr><td>$row[team_id]</td><td>$row[tat_id]</td><td>$row[name]</td><td>$row[phone]</td><td>$row[email]</td><td>$row[clg]</td></tr>";

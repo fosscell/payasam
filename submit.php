@@ -66,7 +66,7 @@ if($result->num_rows == 0)
 
 .col
 {
-	color:white;
+	color:#777;
 }
 #mid
 {
@@ -131,18 +131,10 @@ $(document).ready(function () {
       $("#link>div").removeClass("link_select");
       $(this).addClass("link_select");
       $("#link>div").css({
-        "background-color": "black",
-        "color": "silver",
-        "position": "relative",
-        "left": 0,
-        "width": 164
+        "color": "#777",
       });
       $(this).css({
-        "background-color": "white",
-        "color": "black",
-        "position": "relative",
-        "left": -10,
-        "width": 174
+        "color": "#555",
       });
       // all the contents except the one clicked are hidden
       for (t = 0; t <= (desc.length + 2); t++) {
@@ -164,7 +156,7 @@ $(document).ready(function () {
   $("#link>div").mouseover(function () {
     if (!($(this).hasClass("link_select"))) {
       $(this).css({
-        "color": "white",
+        "color": "#555",
         "cursor": "pointer"
       });
     }
@@ -173,7 +165,7 @@ $(document).ready(function () {
   $("#link>div").mouseout(function () {
     if (!($(this).hasClass("link_select"))) {
       $(this).css({
-        "color": "silver"
+        "color": "#777"
       });
     }
   });
@@ -213,7 +205,7 @@ $(document).ready(function () {
         $("#cnt" + (k + 1)).append(cnt[0] + "<br/>");
         $("#cnt" + (k + 1)).append("Event Manager<br/>");
         $("#cnt" + (k + 1)).append("Phone:+91" + cnt[1] + "<br/>");
-        $("#cnt" + (k + 1)).append("E-mail:" + cnt[2] + "@tathva.org<br/><br/>");
+        $("#cnt" + (k + 1)).append("E-mail:" + cnt[2] + "@website.com<br/><br/>");
       }
     }
   }

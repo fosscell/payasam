@@ -9,7 +9,7 @@ if (!isset($_SESSION['type']) || $_SESSION['type'] != "AD")
 
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-<title>Tathva 12 CMS: Administrator Terminal</title>
+<title>Payasam CMS: Administrator Terminal</title>
 <link rel="shortcut icon" href="taticon.png" type="image/png"/>
 <!-- CSS styles -->
 <style type="text/css">

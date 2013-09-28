@@ -45,12 +45,12 @@ if (isset($_POST['colleges'])) {
 
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-<title>Tathva 12 College List</title>
+<title>College List</title>
 <script type="text/javascript" src="scripts/jquery.min.js"></script>
 
 </head>
 <body>
-  <h1>Tathva 12 College List -FORBIDDEN PAGE-</h1>
+  <h1>College List -FORBIDDEN PAGE-</h1>
   <a href="logout.php">Log out</a>
   <form action="cl_add.php" method="post">
     <textarea name="colleges" style="height:600px;width:480px"></textarea><br/>

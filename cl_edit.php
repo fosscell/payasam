@@ -46,12 +46,12 @@ else
 
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-<title>Tathva 12 College List</title>
+<title>College List</title>
 <script type="text/javascript" src="scripts/jquery.min.js"></script>
 
 </head>
 <body>
-  <h1>Tathva 12 College List</h1>
+  <h1>College List</h1>
   <a href="cl.php">Back to list</a>
   <a href="logout.php">Log out</a>
   <form action="cl_edit.php" method="POST">

@@ -186,13 +186,12 @@
 	left:280px;
 	top:28px;
 	height:45px;
-	width:566px;
-	background-color:black;
+	width:550px;
     z-index:3;
-    color:white;
     font-size:30px;
     padding-top:16px;
     text-align:center;
+    border-bottom:1px solid #ddd;
 }
 
 #heading p
@@ -206,7 +205,7 @@
     margin:0px;
     font-size:32px;
     padding-top:12px;
-    color:white;
+    color:#777;
 }
 
 #link
@@ -216,7 +215,7 @@
 	top:80px;
 	height:360px;
 	width:164px;
-	color:silver;
+	color:#777;
 	text-align:right;
 	z-index:1;
 	padding-top:40px;
@@ -244,7 +243,7 @@
 	top:40px;
 	overflow:auto;
 	z-index:2;
-	color:black;
+	color:#777;
 }
 
 #midframe
@@ -266,16 +265,21 @@
 	bottom:10px;
 	cursor:pointer;
 	width:150px;
-	height:25px;
-	color:white;
+	padding:5px;
+	color:#777;
 	font-family:Cafe_Tathva;
 	text-align:center;
-	background-color:rgba(0,0,0,0.5);
+	border:1px solid #ddd;
 }
 
 #register p
 {
 	padding-top:10px;
+}
+
+#contact,#prize,#participant
+{
+	color:#777;
 }
 
 #contact

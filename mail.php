@@ -18,7 +18,7 @@ else if (isset($_POST['eids']) && $_POST['replytoname'] && $_POST['replytoemail'
     die("Connect failed: ".$mysqli->connect_error);
   $replyto = "$_POST[replytoname] <$_POST[replytoemail]>";
   $headers = "Reply-To: $replyto\r\n";
-  $headers .= "From: Tathva 12 Mailer <nitcfest@gator860.hostgator.com>\r\n";
+  $headers .= "From: Mailer <nitcfest@gator860.hostgator.com>\r\n";
   $headers .= "Organization: National Institute of Technology, Calicut\r\n";
   $headers .= "MIME-Version: 1.0\r\n";
   $headers .= "Content-type: text/plain; charset=ISO-8859-1\r\n";
@@ -56,7 +56,7 @@ if (isset($_POST['mail'])) {
 
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-<title>Tathva 12 Mailer</title>
+<title>Mailer</title>
 <script type="text/javascript" src="scripts/jquery.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function () {
@@ -128,7 +128,7 @@ $(document).ready(function () {
 </style>
 </head>
 <body>
-  <h1>Tathva 12 mailer</h1>
+  <h1>mailer</h1>
   Group mail
   <a href="mails_add.php">Add new eMails</a>
   <a href="mail_history.php">Mail history</a>
