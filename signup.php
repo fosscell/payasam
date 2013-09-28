@@ -1,5 +1,10 @@
 <?php
-// This is where event managers signs up, and everyone logs in
+// This is from where everyone sings in, and event managers or proofreaders signs up
+// TODO List
+// 1. When a user with multiple privileges signs in, he should be redirected to a "menu" page.
+//    For example, an event manager should also be given a choice to view his/her event's registration list
+//                 this "menu" page may replace proofreader.php
+// 2. College list management accounts and Mailer accounts should be sign-up-able with admin verification
 require_once("initdb.php");
 $msg = "";
 // if a session exists then redirect to the respective page
@@ -105,10 +110,10 @@ if (isset($_POST["signup"])) {
   @font-face
   {
     font-family:Tathva_Cafe;
-    src:url("imgs/CafeNeroM54.ttf");
+    src:url("CafeNeroM54.ttf");
   }
   body {
-    background-image:url("cms.jpg");
+    background-image:url("imgs/cms.jpg");
     background-size:100%;
   }
   #wrapper {
@@ -216,7 +221,8 @@ $(document).ready(function() {
 <body>
   <?php
 // When in 'proofreading' phase, manager accounts are invalidated.
-// After that, he/she, when tries to sign in, will be provided with the event registration list of his/her event.
+// After that, he/she, when tries to sign in, will be provided with
+// the event registration list of his/her event.
 if ($erlist) {
   $res = $mysqli->query("SELECT name FROM events WHERE code='$erlist'");
   if ($row=$res->fetch_assoc()) {
