@@ -19,8 +19,8 @@ $html5fsize	= $_REQUEST['ax-fileSize'];
 $isLast		= $_REQUEST['isLast'];
 
 //if set generates thumbs only on images type files
-$thumbHeight	= '400';
-$thumbWidth	= '500';
+$thumbHeight	= '700';
+$thumbWidth	= '700';
 $thumbPostfix	= $_REQUEST['ax-thumbPostfix'];
 $thumbPath	= $_REQUEST['ax-thumbPath'];
 $thumbFormat	= $_REQUEST['ax-thumbFormat'];
@@ -166,7 +166,7 @@ function checkFilename($fileName, $size, $newName = '')
     //check if legal windows file name
 	if(in_array($fileName, $windowsReserved))
 	{
-		echo json_encode(array('name'=>$fileName, 'size'=>0, 'status'=>'error', 'info'=>'File name not allowed. Windows reserverd.'));	
+		echo json_encode(array('name'=>$fileName, 'size'=>0, 'status'=>'error', 'info'=>'File name not allowed. Windows reserved.'));	
 		return false;
 	}
 	

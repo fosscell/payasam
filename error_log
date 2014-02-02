@@ -1,0 +1,9 @@
+[01-Feb-2014 12:21:34 America/Chicago] PHP Warning:  mysqli::mysqli() [<a href='mysqli.mysqli'>mysqli.mysqli</a>]: (28000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home2/nitcfest/public_html/manager/initdb.php on line 5
+[01-Feb-2014 12:21:44 America/Chicago] PHP Warning:  mysqli::mysqli() [<a href='mysqli.mysqli'>mysqli.mysqli</a>]: (28000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home2/nitcfest/public_html/manager/initdb.php on line 5
+[01-Feb-2014 12:21:45 America/Chicago] PHP Warning:  mysqli::mysqli() [<a href='mysqli.mysqli'>mysqli.mysqli</a>]: (28000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home2/nitcfest/public_html/manager/initdb.php on line 5
+[01-Feb-2014 12:21:46 America/Chicago] PHP Warning:  mysqli::mysqli() [<a href='mysqli.mysqli'>mysqli.mysqli</a>]: (28000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home2/nitcfest/public_html/manager/initdb.php on line 5
+[01-Feb-2014 14:22:59 America/Chicago] PHP Fatal error:  Call to a member function fetch_assoc() on a non-object in /home2/nitcfest/public_html/manager/proofreader.php on line 55
+[02-Feb-2014 03:23:05 America/Chicago] PHP Warning:  mkdir() [<a href='function.mkdir'>function.mkdir</a>]: Permission denied in /home2/nitcfest/public_html/manager/uploader.php on line 33
+[02-Feb-2014 03:26:01 America/Chicago] PHP Warning:  mkdir() [<a href='function.mkdir'>function.mkdir</a>]: Permission denied in /home2/nitcfest/public_html/manager/uploader.php on line 33
+[02-Feb-2014 03:46:59 America/Chicago] PHP Warning:  mkdir() [<a href='function.mkdir'>function.mkdir</a>]: Permission denied in /home2/nitcfest/public_html/manager/uploader.php on line 33
+[02-Feb-2014 03:50:52 America/Chicago] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home2/nitcfest/public_html/manager/uploader.php on line 230

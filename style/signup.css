@@ -1,0 +1,118 @@
+ @font-face
+  {
+    font-family:'ubuntu';
+    src:url("../fonts/ubuntu.ttf");
+  }
+ @font-face
+ {
+ src:url('../fonts/ProximaNova-Regular.otf');
+ font-family:'proxima';
+ }
+ @font-face
+ {
+ src:url('../fonts/Despeinada.otf');
+ font-family:'desp';
+ }   
+ *
+ {
+ 	font-family:'proxima';
+ }
+  body {
+    background-color: #F39C12;
+  }
+  input
+  {
+    width:280px;
+    border:1px solid #e0e0e0;
+    margin:4px;
+    padding:4px 8px;
+  }
+  input[type=submit]
+  {
+    background-color:rgba(0,0,0,0.7);
+    cursor:pointer;
+    border:1px solid #000;
+    color:#fff;
+    margin:4px;
+    padding:4px 8px;
+    width:300px;
+    height:30px;
+  }
+  select
+  {
+    width:300px;
+    margin:4px;
+    height: 25px;
+  }
+  #wrapper {
+    display: none;
+    width: 100%;
+    min-width: 1024px;
+    margin: auto;
+    text-align: center;
+  }
+  #sinwrap, #supwrap {
+    padding: 10px;
+    border-radius: 3px;
+    background-color:#fff;
+    color:#000;
+    margin: 10px;
+  }
+  #supwrap,#sinwrap {
+    width:310px;
+    float:right;
+    margin:10px 50px;
+    clear:right;
+  }
+ 
+  #sinwrap
+  {
+    margin-top:50px;
+  }
+
+  #sinwrap h3, #supwrap h3 {
+    margin: 0 0 5px;
+  }
+  .color
+  {
+    color:#777;
+    font-weight:bold;
+  }
+  #erlist {
+    position: absolute;
+    background: rgba(240,240,240,0.8);
+    z-index: 99;
+  }
+  #title
+  {
+    float:left;
+    clear:both;
+    width:500px;
+    padding:150px 80px;
+    margin:50px;
+    color:#fff;
+    font-size:35px; 
+  }
+
+  #title span
+  {
+    font-family:'desp';
+    font-size: 100px;
+  }
+  
+  #footer
+  {
+    position:absolute;
+    bottom:5%;
+    left:30%;
+    color:white;
+    font-size:15px;
+  }
+  
+  #footer a
+  {
+    font-weight:bold;
+    color:white;
+  }
+   
+    

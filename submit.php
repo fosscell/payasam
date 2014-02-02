@@ -121,7 +121,7 @@ $(document).ready(function () {
         <li><a href="logout.php">Log out</a></li>
     </ul>
     <div id="wrapper">
-        <h2 id="subhead"></h2>
+<!--        <h2 id="subhead"></h2> -->
         <div id="content"></div>
     </div>
     <!-- hidden input fields for populating data from the form data sent from manager.php -->

@@ -23,6 +23,12 @@ if (isset($_SESSION['ecode'])) {
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 <title>CMS: Proofreaders Corner</title>
 <link rel="shortcut icon" href="taticon.png" type="image/png"/>
+<style>
+html
+{
+background-color:#F39C12;
+}
+</style>
 </head>
 
 <body>

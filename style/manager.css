@@ -1,7 +1,14 @@
+@font-face
+{
+	src:url('../fonts/ProximaNova-Regular.otf');
+	font-family:'proxima';
+}
+
 body
 {
-	font-family: "DejaVu Sans", sans-serif;
-	font-size: 14px;
+	font-family: 'proxima',"DejaVu Sans", sans-serif;
+	font-size: 15px;
+	background-color:#fff;
 }
 
 .mid
@@ -15,12 +22,11 @@ body
 }
 
 h1, h2, h3, h4, h5, h6 {
-	font-family: "DejaVu Serif", serif;
+	font-family: 'proxima',"DejaVu Serif", serif;
 }
 .kaja-input {
 	display: block;
-	border: 1px solid #aaa;
-	background-color: #eee;
+	background-color:#f39c12;
 	padding: 10px 10px 0;
 	border-radius: 5px;
 	min-width: 480px;
@@ -35,13 +41,13 @@ input[type=text] {
 	border-radius: 3px;
 }
 .kaja-input .ki-but {
-	font-family: "DejaVu Serif", serif;
+	font-family: 'proxima',"DejaVu Serif", serif;
 	font-size: 16px;
 	cursor: default;
 	display: inline-block;
-	border: 1px solid #aaa;
+	border: 1px solid #777;
 	border-radius: 3px;
-	background-color: #E2E2DD;
+	background-color:#fff;
 	min-width: 30px;
 	height: 25px;
 	text-align: center;
@@ -51,7 +57,7 @@ input[type=text] {
 }
 .kaja-input .ki-but:hover {
 	border: 1px solid #444444;
-	background-color: #ECEAD4;
+	background-color: #eee;
 }
 .kaja-input .sups {
 	padding-top: 2px;
@@ -69,7 +75,7 @@ input[type=text] {
 	display: block;
 }
 .kaja-input textarea {
-	width: 40%;
+	width: 98%;
 	padding: 3px;
 	display: block;
 	float: left;
@@ -80,12 +86,10 @@ input[type=text] {
 .kaja-input .view {
 	min-height: 200px;
 	min-width: 200px;
-	max-height: 400px;
+	max-height: 90%;
 	overflow: auto;
 	display: block;
-	border: 1px solid #999999;
-	border-radius: 3px;
-	background-color: #F5F5F8;
+	color:#fff;
 	padding: 3px;
 	margin: 0 0 10px;
 }
@@ -94,7 +98,7 @@ input[type=text] {
 }
 .kaja-input .help-view {
 	font-size: 12px;
-	color: #555555;
+	color: #fff;
 }
 .left {
 	position: fixed;
@@ -103,11 +107,17 @@ input[type=text] {
 	display: block;
 	width: 320px;
 	height: 100%;
-	background-color: #eee;
+	background-color:#f39c12;
 	padding: 0 15px 0 10px;
 	overflow: auto;
 	border-right:1px solid #aaa;
 }
+
+#new_sec
+{
+	color:#000;
+}
+
 .main {
 	display: block;
 	margin-left: 350px;
@@ -134,9 +144,9 @@ h4,h5 {
 .desc-but {
 	cursor: default;
 	display: inline-block;
-	border: 1px solid #aaa;
+	border: 1px solid #555;
 	border-radius: 3px;
-	background-color: #ddd;
+	background-color: #fff;
 	text-align: center;
 	padding: 5px 10px;
 	float: right;
@@ -144,8 +154,12 @@ h4,h5 {
 	margin: 0 5px;
 }
 .desc-but:hover {
-	border: 1px solid #8888DD;
-	background-color: #E2EDF2;
+	border: 1px solid #000;
+	background-color: #eee;
+}
+a
+{
+	color:#fff;
 }
 
 /*===========================Uploader==========================*/

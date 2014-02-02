@@ -306,7 +306,7 @@ function ins_img_click() {
   var d = $("<div />").appendTo(ki);
   d.ajaxupload({ /* also adds ax-uploader class to d */
 	url:'uploader.php',
-	remotePath:'../2012/images/events/',
+	remotePath:'pictures/',
 	maxFiles: 1,
 	maxFileSize: '2M',
 	allowExt:['jpg','png'],
@@ -321,7 +321,7 @@ function ins_img_click() {
 	  u.ajaxupload('destroy');
 	  var src = u.closest(".kaja-input").children("textarea").get(0),
 		  sel = $(src).get_selection(),
-		  itag = "<img src=\"/2012/images/events/"+img+"\" alt=\""+files[0]+"\"/>";
+		  itag = "<img src=\"/pictures/"+img+"\" alt=\""+files[0]+"\"/>";
 	  src.value = src.value.substring(0, sel.start) + itag + src.value.substring(sel.end);
 	  $(src).set_selection(sel.start,sel.start+itag.length);
 	  update_preview(src);

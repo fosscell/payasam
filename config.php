@@ -5,9 +5,9 @@
 // Make sure the variables are changed according to the database's configuration namely
 // the host name,database username, database password and database name
 $host = 'localhost'; 	
-$db_name = 'tathva';
-$db_user = 'root';
-$db_password = 'pass';
+$db_name = 'nitcfest_ragam14';
+$db_user = 'nitcfest_ragam14';
+$db_password = 'ragamanact';
 // Admin username and password
 $admin="admin";
 $password="password";

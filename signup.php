@@ -1,5 +1,5 @@
 <?php
-// This is from where everyone sings in, and event managers or proofreaders signs up
+// This is from where everyone signs in, and event managers or proofreaders signs up
 // TODO List
 // 1. When a user with multiple privileges signs in, he should be redirected to a "menu" page.
 //    For example, an event manager should also be given a choice to view his/her event's registration list
@@ -109,97 +109,7 @@ if (isset($_POST["signup"])) {
 
   <title>Payasam CMS: Start here!</title>
   <link rel="shortcut icon" href="taticon.png" type="image/png">
-  <style type="text/css">
-  @font-face
-  {
-    font-family:helvetica;
-    src:url("fonts/helvetica.woff");
-  }
-  body {
-    background-color: #fff;
-  }
-  input
-  {
-    width:280px;
-    border:1px solid #e0e0e0;
-    margin:4px;
-    padding:4px 8px;
-  }
-  input[type=submit]
-  {
-    background-color: #aaa;
-    cursor:pointer;
-    border:1px solid #999;
-    margin:4px;
-    padding:4px 8px;
-    width:300px;
-    height:30px;
-  }
-  select
-  {
-    width:300px;
-    margin:4px;
-    height: 25px;
-  }
-  #wrapper {
-    display: none;
-    width: 100%;
-    min-width: 1024px;
-    margin: auto;
-    text-align: center;
-  }
-  #sinwrap, #supwrap {
-    padding: 10px;
-    border: 1px solid #e0e0e0;
-    border-radius: 3px;
-    background-color:#f7f7f7;
-    color:#aaa;
-    margin: 10px;
-  }
-  #supwrap,#sinwrap {
-    width:310px;
-    float:right;
-    margin:10px 50px;
-    clear:right;
-  }
- 
-  #sinwrap
-  {
-    margin-top:50px;
-  }
-
-  #sinwrap h3, #supwrap h3 {
-    margin: 0 0 5px;
-  }
-  .color
-  {
-    color:#777;
-    font-weight:bold;
-  }
-  #erlist {
-    position: absolute;
-    background: rgba(240,240,240,0.8);
-    z-index: 99;
-  }
-  #title
-  {
-    background-color:#f7f7f7;
-    border:1px solid #e0e0e0;
-    float:left;
-    clear:both;
-    width:500px;
-    padding:200px 80px;
-    margin:50px;
-    color:#aaa;
-    font-size:35px; 
-    font-family: helvetica;
-  }
-
-  #title span
-  {
-    font-size: 50px;
-  }
-  </style>
+  <link href='style/signup.css' type='text/css' rel='stylesheet'>
   <script type="text/javascript" src="scripts/jquery.min.js"></script>
   <script type="text/javascript">
 // form validation for signup
@@ -339,6 +249,7 @@ $res1->free();
   </form>
   </div>
   </div>
+  <div id='footer'>Code opensourced on <a href='https://github.com/fosscell/payasam'>github</a> | Credits: John C F & John P Joseph</div>
 </body>
 </html>
 <?php _exit(); ?>

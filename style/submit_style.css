@@ -1,4 +1,20 @@
-﻿#wrapper {
+@font-face
+{
+	src:url('../fonts/ProximaNova-Regular.otf');
+	font-family:'proxima';
+}
+
+*
+{
+	font-family:'proxima';
+	font-size:15px;
+}
+
+html
+{
+	background-color:#F39C12;
+}﻿
+#wrapper {
 	margin-left: 240px;
 }
 
@@ -8,6 +24,7 @@
     list-style-type: none;
     margin: 5px 0 0 20px;
     padding: 0;
+    height:100%;
 }
 
 #menu li {
@@ -15,6 +32,7 @@
 	margin: 5px;
 }
 
-#menu li a.section {
-	color: #333;
+a
+{
+	color:white;
 }

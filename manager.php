@@ -177,7 +177,6 @@ $(document).ready(function () {
         $("#pr_disp").get(0).value = $(this).find("#pr").val();
 
         // collecting and joining content from min and max participation in the following format into the hidden input area for participation
-        // <name>||@||<contact>||@||<email>||0||<name>||@||<contact>||@||<email>||0|| ..        
         $("#prtpnt").get(0).value=$(this).find("#par_min").val()+"||@||"+$(this).find("#par_max").val(); 
         
         // 
